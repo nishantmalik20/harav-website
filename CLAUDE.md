@@ -117,8 +117,8 @@ should always keep in mind.
 > Update this section at the end of each working session so the next session
 > picks up exactly where you left off.
 
-**Last updated:** 2026-06-02
-**Phase:** Frontend + Backend build complete (build verified green on NTFS)
+**Last updated:** 2026-06-03
+**Phase:** Frontend + Backend build complete; pushed to GitHub. Awaiting Vercel link + env keys.
 
 ### Completed
 - [x] Design spec received and reviewed (homepage + shop & portal UI kits)
@@ -130,7 +130,9 @@ should always keep in mind.
 - [x] Frontend build → all Phase 1 pages, sections, layout, booking UI, admin UI (code)
 - [x] Backend build → Supabase clients + RLS migration, Stripe deposit flow, Resend emails, API routes, server actions
 - [x] `npm run build` verified GREEN (24 routes) on NTFS — see exFAT blocker below
+- [x] Pushed to GitHub → github.com/nishantmalik20/harav-website (branches: main = production, dev = working; currently on dev)
 - [ ] Environment variables configured (`.env.example` created; real keys pending)
+- [ ] Vercel project linked to the GitHub repo
 
 ### In Progress
 - Build complete & verified. Awaiting env provisioning + walkthrough before the SEO agent.
@@ -150,9 +152,11 @@ should always keep in mind.
 - Positioning = accessible-priced, women-only, multi-service destination; sell experience/feel, not price.
 
 ### Up Next
-1. ⚠ Move/clone the project to an NTFS drive (D: is exFAT → `next build` fails). Dev + build from e.g. C:\dev\harav-website.
-2. Provision env: create Supabase project + run `supabase/migrations/0001_init.sql` + create Khushi's admin user; add Stripe keys + webhook; verify Resend domain; fill `.env.local` from `.env.example`.
-3. Run **06-seo-geo-agent** (metadata/sitemap/robots/JSON-LD) → **07-reviewer** → **08-qa** → deploy to Vercel.
+1. Import the repo into Vercel (dashboard → New Project → harav-website). Production branch = main; framework auto-detects Next.js. Vercel builds on Linux, so the exFAT issue does not affect it.
+2. Provision env (client working on these): Supabase (run `supabase/migrations/0001_init.sql` + create Khushi's admin user), Stripe (keys + webhook secret), Resend (verify domain). Add to Vercel env + local `.env.local` from `.env.example`.
+3. Run **06-seo-geo-agent** → **07-reviewer** → **08-qa**.
+
+> Local builds: D: is exFAT → `next build` fails (readlink). Build on an NTFS path, or just let Vercel build.
 
 ### Blockers (waiting on client — see discovery.md §8)
 - ✅ RESOLVED — Booking: in-house custom build (no third-party)
