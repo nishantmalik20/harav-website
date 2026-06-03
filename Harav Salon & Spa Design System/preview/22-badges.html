@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bg-page); }
+  body { font-family: var(--font-body); color: var(--fg-1); }
+  .card { padding: 24px 28px; box-sizing: border-box; width: 700px; }
+  .eyebrow {
+    font-family: var(--font-label); font-size: 10px;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--champagne-deep); margin: 0 0 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--bone); }
+</style>
+</head>
+<body>
+<div class="card">
+  <p class="eyebrow">Components · Status &amp; badges</p>
+  <div style="display:flex; flex-wrap:wrap; gap:14px; align-items:center;">
+    
+      <div style="display:inline-flex; align-items:center; gap:8px; padding:5px 12px; background:#EDF0E7; color:#5B6E4A; font-family:var(--font-label); font-size:10px; letter-spacing:0.28em; text-transform:uppercase;">
+        <span style="width:6px; height:6px; border-radius:999px; background:#5B6E4A;"></span>
+        Confirmed
+      </div>
+    
+      <div style="display:inline-flex; align-items:center; gap:8px; padding:5px 12px; background:#F6EBD9; color:#B8853A; font-family:var(--font-label); font-size:10px; letter-spacing:0.28em; text-transform:uppercase;">
+        <span style="width:6px; height:6px; border-radius:999px; background:#B8853A;"></span>
+        Awaiting
+      </div>
+    
+      <div style="display:inline-flex; align-items:center; gap:8px; padding:5px 12px; background:#F2DCDB; color:#8A2A2E; font-family:var(--font-label); font-size:10px; letter-spacing:0.28em; text-transform:uppercase;">
+        <span style="width:6px; height:6px; border-radius:999px; background:#8A2A2E;"></span>
+        Cancelled
+      </div>
+    
+      <div style="display:inline-flex; align-items:center; gap:8px; padding:5px 12px; background:#F0E8D9; color:#9C8770; font-family:var(--font-label); font-size:10px; letter-spacing:0.28em; text-transform:uppercase;">
+        <span style="width:6px; height:6px; border-radius:999px; background:#9C8770;"></span>
+        Note
+      </div>
+    
+  </div>
+  <div style="margin-top:18px; display:flex; gap:14px; flex-wrap:wrap;">
+    <div style="border:1px solid var(--border-soft); padding:5px 14px; font-family:var(--font-label); font-size:10px; letter-spacing:0.32em; color:var(--champagne-deep);">FEW LEFT</div>
+    <div style="border:1px solid var(--noir); padding:5px 14px; font-family:var(--font-label); font-size:10px; letter-spacing:0.32em; color:var(--noir); background:var(--linen);">NEW · SUMMER</div>
+    <div style="background:var(--noir); color:var(--pearl); padding:5px 14px; font-family:var(--font-label); font-size:10px; letter-spacing:0.32em;">SIGNATURE</div>
+  </div>
+  <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-3); margin-top:14px;">Pill dots for state · sharp rectangles for marketing badges · Jost labels throughout</div>
+</div></body></html>

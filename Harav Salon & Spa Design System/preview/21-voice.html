@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bg-page); }
+  body { font-family: var(--font-body); color: var(--fg-1); }
+  .card { padding: 24px 28px; box-sizing: border-box; width: 700px; }
+  .eyebrow {
+    font-family: var(--font-label); font-size: 10px;
+    letter-spacing: 0.34em; text-transform: uppercase;
+    color: var(--brass-deep); margin: 0 0 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::after { content: ''; flex: 1; height: 5px;
+    border-top: 1px solid var(--brass); border-bottom: 1px solid var(--brass); }
+</style>
+</head>
+<body>
+<div class="card">
+  <p class="eyebrow">Voice · Do &amp; do-not</p>
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:18px;">
+    <div style="background:var(--bg-card); border:1px solid var(--border-hairline); padding:18px;">
+      <div style="font-family:var(--font-label); font-size:10px; letter-spacing:0.34em; color:#4E7A3A; margin-bottom:10px;">DO</div>
+      <div style="font-family:var(--font-display); font-weight:500; font-size:24px; color:var(--fg-1); line-height:1.15; margin-bottom:8px;">An hour, kept in gold.</div>
+      <div style="font-family:var(--font-body); font-size:13px; color:var(--fg-2); line-height:1.55;">Step in. Brushed gold, warm light — an hour cast entirely for you.</div>
+    </div>
+    <div style="background:var(--bg-card); border:1px solid var(--border-hairline); padding:18px;">
+      <div style="font-family:var(--font-label); font-size:10px; letter-spacing:0.34em; color:#7A2230; margin-bottom:10px;">DO NOT</div>
+      <div style="font-family:var(--font-display); font-size:24px; color:var(--fg-1); line-height:1.15; margin-bottom:8px; text-decoration:line-through; text-decoration-color:#7A2230;">Book your appointment today!!</div>
+      <div style="font-family:var(--font-body); font-size:13px; color:var(--fg-2); line-height:1.55; text-decoration:line-through; text-decoration-color:#7A2230;">Hey gorgeous, ready to glow up? ✨ Our AMAZING stylists will TRANSFORM your hair!</div>
+    </div>
+  </div>
+  <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-3); margin-top:14px;">Considered, theatrical, opulent — but never exclamation, emoji, or pet names.</div>
+</div></body></html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bg-page); }
+  body { font-family: var(--font-body); color: var(--fg-1); }
+  .card { padding: 24px 28px; box-sizing: border-box; width: 700px; }
+  .eyebrow {
+    font-family: var(--font-label); font-size: 10px;
+    letter-spacing: 0.34em; text-transform: uppercase;
+    color: var(--brass-deep); margin: 0 0 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::after { content: ''; flex: 1; height: 5px;
+    border-top: 1px solid var(--brass); border-bottom: 1px solid var(--brass); }
+</style>
+</head>
+<body>
+<div class="card">
+  <p class="eyebrow">Brand · Deco ornaments</p>
+  <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:18px; text-align:center;">
+    <div>
+      <div style="height:80px; display:flex; align-items:flex-end; justify-content:center; color:var(--brass-deep);">
+        <img src="../assets/ornament-sunburst.svg" style="width:120px; height:auto; color:var(--brass-deep);">
+      </div>
+      <div style="font-family:var(--font-display); font-weight:500; font-size:15px; margin-top:8px;">Sunburst</div>
+      <div style="font-family:var(--font-body); font-size:10px; color:var(--fg-3);">section caps, openers</div>
+    </div>
+    <div>
+      <div style="height:80px; display:flex; align-items:flex-end; justify-content:center; color:var(--brass-deep);">
+        <img src="../assets/ornament-fan.svg" style="width:96px; height:auto; color:var(--brass-deep);">
+      </div>
+      <div style="font-family:var(--font-display); font-weight:500; font-size:15px; margin-top:8px;">Fan</div>
+      <div style="font-family:var(--font-body); font-size:10px; color:var(--fg-3);">corner accents</div>
+    </div>
+    <div>
+      <div style="height:80px; display:flex; align-items:flex-end; justify-content:center; color:var(--brass-deep);">
+        <img src="../assets/ornament-ziggurat.svg" style="width:140px; height:auto; color:var(--brass-deep);">
+      </div>
+      <div style="font-family:var(--font-display); font-weight:500; font-size:15px; margin-top:8px;">Ziggurat</div>
+      <div style="font-family:var(--font-body); font-size:10px; color:var(--fg-3);">borders, frames</div>
+    </div>
+    <div>
+      <div style="height:80px; display:flex; align-items:center; justify-content:center; color:var(--brass);">
+        <span style="display:inline-block; width:100px; height:7px; border-top:1px solid var(--brass); border-bottom:1px solid var(--brass);"></span>
+      </div>
+      <div style="font-family:var(--font-display); font-weight:500; font-size:15px;">Double rule</div>
+      <div style="font-family:var(--font-body); font-size:10px; color:var(--fg-3);">dividers, eyebrows</div>
+    </div>
+  </div>
+</div></body></html>

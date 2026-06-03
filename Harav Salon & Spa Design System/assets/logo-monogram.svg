@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140">
+  <defs>
+    
+  </defs>
+  
+  <g fill="none" stroke="currentColor" stroke-width="1.25">
+    <polygon points="35,8 105,8 132,35 132,105 105,132 35,132 8,105 8,35"></polygon>
+    <polygon points="40,15 100,15 125,40 125,100 100,125 40,125 15,100 15,40" stroke-opacity="0.5"></polygon>
+  </g>
+  
+  <text x="70" y="92" text-anchor="middle" class="mono-h" font-size="68" fill="currentColor">H</text>
+  
+  <circle cx="70" cy="22" r="2" fill="#C99B5C"></circle>
+  <circle cx="70" cy="118" r="2" fill="#C99B5C"></circle>
+</svg>

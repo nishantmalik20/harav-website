@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 340" width="420" height="340">
+  <defs>
+    
+  </defs>
+  <g fill="currentColor">
+    
+    <g transform="translate(210 30)" fill="none" stroke="#C99B5C" stroke-width="1">
+      <path d="M -36 24 A 36 36 0 0 1 36 24"></path>
+      <path d="M -24 24 A 24 24 0 0 1 24 24"></path>
+      <path d="M -12 24 A 12 12 0 0 1 12 24"></path>
+      <line x1="0" y1="0" x2="0" y2="24"></line>
+    </g>
+    <text x="210" y="80" text-anchor="middle" class="st-label" font-size="10">EST. WINNIPEG</text>
+    <text x="210" y="170" text-anchor="middle" class="st-deco" font-size="86">HARAV</text>
+    
+    <line x1="60" y1="196" x2="186" y2="196" stroke="#C99B5C" stroke-width="1"></line>
+    <line x1="234" y1="196" x2="360" y2="196" stroke="#C99B5C" stroke-width="1"></line>
+    <line x1="60" y1="200" x2="186" y2="200" stroke="#C99B5C" stroke-width="0.6"></line>
+    <line x1="234" y1="200" x2="360" y2="200" stroke="#C99B5C" stroke-width="0.6"></line>
+    <text x="210" y="204" text-anchor="middle" class="st-amp" font-size="26" fill="#C99B5C">&amp;</text>
+    <text x="210" y="234" text-anchor="middle" class="st-label" font-size="15">SALON · SPA</text>
+    
+    <g transform="translate(210 296)" fill="none" stroke="#C99B5C" stroke-width="1">
+      <line x1="-40" y1="0" x2="40" y2="0"></line>
+      <line x1="-50" y1="-6" x2="50" y2="-6"></line>
+      <circle cx="0" cy="0" r="3" fill="#C99B5C" stroke="none"></circle>
+    </g>
+  </g>
+</svg>

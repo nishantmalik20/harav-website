@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bg-page); }
+  body { font-family: var(--font-body); color: var(--fg-1); }
+  .card { padding: 24px 28px; box-sizing: border-box; width: 700px; }
+  .eyebrow {
+    font-family: var(--font-label); font-size: 10px;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--champagne-deep); margin: 0 0 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--bone); }
+  /* shared component styles for cards */
+  .btn-primary {
+    display:inline-flex; align-items:center; justify-content:center;
+    background: var(--noir); color: var(--pearl);
+    font-family: var(--font-body); font-weight: 500; font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 14px 26px; border: 0; border-radius: 0;
+    cursor: pointer; transition: opacity 220ms ease;
+  }
+  .btn-primary:hover { opacity: .75; }
+  .btn-ghost {
+    background: transparent; color: var(--noir);
+    font-family: var(--font-body); font-weight: 500; font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 14px 26px; border: 1px solid var(--noir); border-radius: 0;
+    cursor: pointer; transition: background 220ms ease, color 220ms ease;
+  }
+  .btn-ghost:hover { background: var(--noir); color: var(--pearl); }
+  .btn-link {
+    background:none; border:0; padding:0;
+    font-family: var(--font-body); font-weight: 400; font-size: 14px;
+    color: var(--noir); cursor: pointer;
+    border-bottom: 1px solid var(--champagne-deep);
+    padding-bottom: 2px;
+  }
+  .input {
+    display: block; width: 100%; box-sizing: border-box;
+    font-family: var(--font-body); font-size: 16px; color: var(--fg-1);
+    background: transparent; border: 0; border-bottom: 1px solid var(--border-soft);
+    padding: 10px 0; outline: none; transition: border-color 220ms ease;
+  }
+  .input:focus { border-bottom-color: var(--champagne-deep); }
+  .input::placeholder { color: var(--fg-muted); }
+</style>
+</head>
+<body>
+<div class="card">
+  <p class="eyebrow">Components · Stylist card</p>
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:18px;">
+    
+      <div>
+        <div style="height:160px; background:linear-gradient(180deg, #C8A876 0%, var(--blush) 100%); border:1px solid var(--border-hairline); position:relative;">
+          <div style="position:absolute; bottom:10px; left:12px; font-family:var(--font-label); font-size:9px; letter-spacing:0.32em; color:var(--noir); opacity:.6;">PORTRAIT</div>
+        </div>
+        <div style="padding-top:12px;">
+          <div style="font-family:var(--font-display); font-size:22px; color:var(--fg-1);">Mireille</div>
+          <div style="font-family:var(--font-label); font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:var(--champagne-deep); margin-top:4px;">Senior stylist</div>
+          <div style="font-family:var(--font-body); font-size:13px; color:var(--fg-2); margin-top:6px;">Colour · Cuts</div>
+        </div>
+      </div>
+    
+      <div>
+        <div style="height:160px; background:linear-gradient(180deg, #E9D2C5 0%, var(--blush) 100%); border:1px solid var(--border-hairline); position:relative;">
+          <div style="position:absolute; bottom:10px; left:12px; font-family:var(--font-label); font-size:9px; letter-spacing:0.32em; color:var(--noir); opacity:.6;">PORTRAIT</div>
+        </div>
+        <div style="padding-top:12px;">
+          <div style="font-family:var(--font-display); font-size:22px; color:var(--fg-1);">Saoirse</div>
+          <div style="font-family:var(--font-label); font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:var(--champagne-deep); margin-top:4px;">Aesthetician</div>
+          <div style="font-family:var(--font-body); font-size:13px; color:var(--fg-2); margin-top:6px;">Facials · Lash</div>
+        </div>
+      </div>
+    
+      <div>
+        <div style="height:160px; background:linear-gradient(180deg, #B89F86 0%, var(--blush) 100%); border:1px solid var(--border-hairline); position:relative;">
+          <div style="position:absolute; bottom:10px; left:12px; font-family:var(--font-label); font-size:9px; letter-spacing:0.32em; color:var(--noir); opacity:.6;">PORTRAIT</div>
+        </div>
+        <div style="padding-top:12px;">
+          <div style="font-family:var(--font-display); font-size:22px; color:var(--fg-1);">Inès</div>
+          <div style="font-family:var(--font-label); font-size:10px; letter-spacing:0.28em; text-transform:uppercase; color:var(--champagne-deep); margin-top:4px;">Nail artist</div>
+          <div style="font-family:var(--font-body); font-size:13px; color:var(--fg-2); margin-top:6px;">Bespoke nails</div>
+        </div>
+      </div>
+    
+  </div>
+</div></body></html>

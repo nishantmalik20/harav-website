@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bg-page); }
+  body { font-family: var(--font-body); color: var(--fg-1); }
+  .card { padding: 24px 28px; box-sizing: border-box; width: 700px; }
+  .eyebrow {
+    font-family: var(--font-label); font-size: 10px;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--champagne-deep); margin: 0 0 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--bone); }
+</style>
+</head>
+<body>
+<div class="card">
+  <p class="eyebrow">Components · Product card</p>
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
+    
+      <div>
+        <div style="aspect-ratio: 4/5; overflow:hidden; background:var(--blush); border:1px solid var(--border-hairline);">
+          <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&q=85" style="width:100%; height:100%; object-fit:cover; filter:saturate(.82) sepia(.08);">
+        </div>
+        <div style="padding-top:12px; display:grid; grid-template-columns:1fr auto; gap:12px; align-items:start;">
+          <div>
+            <div style="font-family:var(--font-display); font-size:18px; color:var(--fg-1); line-height:1.2;">Quietude Hair Oil</div>
+            <div style="font-family:var(--font-label); font-size:9px; letter-spacing:0.28em; text-transform:uppercase; color:var(--fg-3); margin-top:4px;">Pre-wash · 50ml</div>
+          </div>
+          <div style="font-family:var(--font-display); font-size:17px; color:var(--fg-1); font-variant-numeric:oldstyle-nums;">$64</div>
+        </div>
+      </div>
+    
+      <div>
+        <div style="aspect-ratio: 4/5; overflow:hidden; background:var(--blush); border:1px solid var(--border-hairline);">
+          <img src="https://images.unsplash.com/photo-1583241800698-9c2e0c91d0d1?w=600&q=85" style="width:100%; height:100%; object-fit:cover; filter:saturate(.82) sepia(.08);">
+        </div>
+        <div style="padding-top:12px; display:grid; grid-template-columns:1fr auto; gap:12px; align-items:start;">
+          <div>
+            <div style="font-family:var(--font-display); font-size:18px; color:var(--fg-1); line-height:1.2;">Champagne Masque</div>
+            <div style="font-family:var(--font-label); font-size:9px; letter-spacing:0.28em; text-transform:uppercase; color:var(--fg-3); margin-top:4px;">Mask · 60ml</div>
+          </div>
+          <div style="font-family:var(--font-display); font-size:17px; color:var(--fg-1); font-variant-numeric:oldstyle-nums;">$78</div>
+        </div>
+      </div>
+    
+      <div>
+        <div style="aspect-ratio: 4/5; overflow:hidden; background:var(--blush); border:1px solid var(--border-hairline);">
+          <img src="https://images.unsplash.com/photo-1599751449128-eb7249c3d6b1?w=600&q=85" style="width:100%; height:100%; object-fit:cover; filter:saturate(.82) sepia(.08);">
+        </div>
+        <div style="padding-top:12px; display:grid; grid-template-columns:1fr auto; gap:12px; align-items:start;">
+          <div>
+            <div style="font-family:var(--font-display); font-size:18px; color:var(--fg-1); line-height:1.2;">The Quiet Hour Candle</div>
+            <div style="font-family:var(--font-label); font-size:9px; letter-spacing:0.28em; text-transform:uppercase; color:var(--fg-3); margin-top:4px;">Candle · 220g</div>
+          </div>
+          <div style="font-family:var(--font-display); font-size:17px; color:var(--fg-1); font-variant-numeric:oldstyle-nums;">$64</div>
+        </div>
+      </div>
+    
+  </div>
+</div></body></html>

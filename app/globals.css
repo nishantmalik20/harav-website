@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+/* ============================================================
+   HARAV SALON & SPA — design tokens (warm gold system)
+   Ported from the design system's colors_and_type.css.
+   Tailwind v4 CSS-first theme: these generate utilities like
+   bg-espresso, text-gold, font-display, etc.
+   ============================================================ */
+@theme {
+  /* Primary palette */
+  --color-espresso: #241712;
+  --color-gold: #c99b5c;
+  --color-gold-deep: #9a6e2e;
+  --color-gold-light: #e8c887;
+  --color-terracotta: #c36602;
+  --color-terracotta-deep: #9c4f02;
+  --color-cocoa: #33210f;
+  --color-cream: #f6eedf;
+  --color-pearl: #fbf4e6;
+  --color-bone: #efe6d3;
+  --color-ivory: #fbf6ec;
+  --color-mirror: #cbbe9f;
+  --color-blush: #ead8c0;
+  --color-frame: #b6884e;
+
+  /* Warm neutrals */
+  --color-ink-600: #4a3f35;
+  --color-ink-500: #6b5b49;
+  --color-ink-400: #8e7c66;
+  --color-ink-300: #b19c82;
+  --color-ink-200: #d1bfa1;
+
+  /* Semantic states */
+  --color-success: #4e7a3a;
+  --color-warn: #b8853a;
+  --color-error: #9c3a22;
+
+  /* Fonts (next/font sets the variables in layout.tsx) */
+  --font-display: var(--font-marcellus), "Times New Roman", serif;
+  --font-body: var(--font-jost), "Helvetica Neue", system-ui, sans-serif;
+
+  /* Radii — sharp, architectural */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+}
+
+/* Warm dark gradient — hero + closing CTA */
+@utility hero-gradient {
+  background: linear-gradient(120deg, #8a5a24 0%, #5c3917 46%, #2c1b11 100%);
+}
+/* Golden-brown frame gradient */
+@utility frame-gradient {
+  background: linear-gradient(135deg, #c49a5c 0%, #b6884e 45%, #9c6f37 100%);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Marcellus is single-weight — render real weights only */
+    font-synthesis: none;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-espresso);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Headings use the display face at a single weight */
+  h1, h2, h3 {
+    font-weight: 400;
+  }
+  /* The design emphasises with gold colour, not italics */
+  h1 em, h2 em, h3 em {
+    font-style: normal;
+  }
+  ::selection {
+    background-color: var(--color-gold-light);
+    color: var(--color-espresso);
+  }
+  /* Visible, on-brand focus ring for accessibility */
+  :focus-visible {
+    outline: 2px solid var(--color-gold-deep);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

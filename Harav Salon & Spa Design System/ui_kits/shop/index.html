@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Harav · Boutique</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bg-page); color: var(--fg-1); }
+  body { font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: inherit; text-decoration: none; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="products-data.jsx"></script>
+<script type="text/babel" src="ShopHeader.jsx"></script>
+<script type="text/babel" src="CategoryRail.jsx"></script>
+<script type="text/babel" src="FilterBar.jsx"></script>
+<script type="text/babel" src="ProductCard.jsx"></script>
+<script type="text/babel" src="ProductGrid.jsx"></script>
+<script type="text/babel" src="ProductDetail.jsx"></script>
+<script type="text/babel" src="CartDrawer.jsx"></script>
+
+<script type="text/babel">
+  const { useState, useMemo } = React;
+
+  function ShopNav({ cartCount, onOpenCart }) {
+    const link = {
+      fontFamily: 'var(--font-body)', fontSize: 12,
+      letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--noir)',
+      cursor: 'pointer', textDecoration: 'none',
+    };
+    return (
+      <nav style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '20px 56px',
+        background: 'rgba(242,235,221,0.92)',
+        backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+        borderBottom: '1px solid var(--border-hairline)',
+      }}>
+        <a href="../../Harav%20Salon%20%26%20Spa.html" style={{ display: 'flex', alignItems: 'center', color: 'var(--noir)' }}>
+          <img src="../../assets/logo-wordmark.svg" style={{ height: 32, width: 'auto' }} />
+        </a>
+        <div style={{ display: 'flex', gap: 36 }}>
+          <a style={link} href="../../Harav%20Salon%20%26%20Spa.html">Home</a>
+          <a style={link} href="../../Harav%20Salon%20%26%20Spa.html#services">Treatments</a>
+          <a style={link} href="../../Harav%20Salon%20%26%20Spa.html#about">About</a>
+          <a style={{ ...link, fontWeight: 500 }}>
+            <span style={{ borderBottom: '1px solid var(--champagne-deep)', paddingBottom: 4 }}>Shop</span>
+          </a>
+          <a style={link} href="../../Harav%20Salon%20%26%20Spa.html#blog">Journal</a>
+          <a style={link} href="../../Harav%20Salon%20%26%20Spa.html#contact">Visit</a>
+        </div>
+        <button onClick={onOpenCart} style={{
+          background: 'transparent', border: '1px solid var(--noir)',
+          fontFamily: 'var(--font-body)', fontSize: 11, fontWeight: 500,
+          letterSpacing: '0.24em', textTransform: 'uppercase', color: 'var(--noir)',
+          padding: '11px 20px', cursor: 'pointer',
+          display: 'inline-flex', alignItems: 'center', gap: 10,
+          transition: 'background 220ms ease, color 220ms ease',
+        }}
+          onMouseEnter={e=>{ e.currentTarget.style.background='var(--noir)'; e.currentTarget.style.color='var(--pearl)'; }}
+          onMouseLeave={e=>{ e.currentTarget.style.background='transparent'; e.currentTarget.style.color='var(--noir)'; }}>
+          Bag
+          <span style={{
+            fontFamily: 'var(--font-display)', fontSize: 14,
+            fontVariantNumeric: 'oldstyle-nums', letterSpacing: 0,
+            opacity: cartCount > 0 ? 1 : 0.45,
+          }}>·  {String(cartCount).padStart(2,'0')}</span>
+        </button>
+      </nav>
+    );
+  }
+
+  function App() {
+    const [cat, setCat] = useState('All');
+    const [sort, setSort] = useState('Curated');
+    const [openProduct, setOpenProduct] = useState(null);
+    const [cartOpen, setCartOpen] = useState(false);
+    const [cart, setCart] = useState([]);
+
+    const filtered = useMemo(() => {
+      let list = window.HARAV_PRODUCTS;
+      if (cat !== 'All' && cat !== 'Gift') list = list.filter(p => p.cat === cat);
+      if (cat === 'Gift') list = list.filter(p => p.price >= 60);
+      if (sort === 'Price · low') list = [...list].sort((a, b) => a.price - b.price);
+      if (sort === 'Price · high') list = [...list].sort((a, b) => b.price - a.price);
+      return list;
+    }, [cat, sort]);
+
+    const onAdd = (product) => {
+      setCart(prev => {
+        const found = prev.find(it => it.product.id === product.id);
+        if (found) return prev.map(it => it.product.id === product.id ? { ...it, qty: it.qty + 1 } : it);
+        return [...prev, { product, qty: 1 }];
+      });
+      setOpenProduct(null);
+      setCartOpen(true);
+    };
+    const onChange = (id, qty) => {
+      if (qty <= 0) setCart(prev => prev.filter(it => it.product.id !== id));
+      else setCart(prev => prev.map(it => it.product.id === id ? { ...it, qty } : it));
+    };
+    const cartCount = cart.reduce((s, it) => s + it.qty, 0);
+
+    return (
+      <React.Fragment>
+        <ShopNav cartCount={cartCount} onOpenCart={() => setCartOpen(true)} />
+        <ShopHeader />
+        <CategoryRail active={cat} onPick={setCat} />
+        <FilterBar count={filtered.length} sort={sort} setSort={setSort} />
+        <ProductGrid products={filtered} onOpen={setOpenProduct} onAdd={onAdd} />
+        <ProductDetail product={openProduct} onClose={() => setOpenProduct(null)} onAdd={onAdd} />
+        <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} items={cart} onChange={onChange} />
+      </React.Fragment>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

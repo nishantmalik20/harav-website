@@ -1,0 +1,289 @@
+/* ============================================================
+   HARAV SALON & SPA — Colors & Typography
+   WARM GOLD direction: espresso, gold/brass, terracotta, cream.
+   Marcellus (display) + Jost (body).
+
+   This is the single source of truth for the brand's visual
+   tokens. Token NAMES are kept stable for backwards-compat
+   (e.g. --onyx, --emerald) but their VALUES are the warm
+   system. New work should prefer the warm-named aliases
+   (--espresso, --terracotta, --gold…).
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap");
+
+:root {
+  /* ───────────── COLORS — PRIMARY PALETTE ─────────────
+     Espresso & gold, warmed by terracotta and cream.
+     Brushed brass, candlelight, cedar, caramel.       */
+
+  --espresso:    #241712;   /* Warm near-black — primary ink */
+  --gold:        #C99B5C;   /* Brushed gold — the metallic */
+  --gold-deep:   #9A6E2E;   /* Gold for type on light */
+  --gold-light:  #E8C887;   /* Highlight, sheen, fine rules */
+  --terracotta:  #C36602;   /* Burnt-orange accent — feature moments */
+  --terracotta-deep:#9C4F02;/* Pressed/active terracotta */
+  --cocoa:       #33210F;   /* Tinted dark sections / panels */
+  --cream:       #F6EEDF;   /* Warm page bg */
+  --pearl:       #FBF4E6;   /* Lightest cream — card bg */
+  --bone:        #EFE6D3;   /* Quiet warm beige — sunken sections */
+  --ivory:       #FBF6EC;   /* Off-white page */
+  --mirror:      #CBBE9F;   /* Taupe-gold, dividers */
+
+  /* ───────────── BACKWARDS-COMPAT TOKEN ALIASES ─────────────
+     Old (green-era) names kept alive, remapped to warm so
+     existing UI kits render correctly without edits. */
+  --onyx:           var(--espresso); /* was blue-black; now warm espresso */
+  --brass:          var(--gold);
+  --brass-deep:     var(--gold-deep);
+  --brass-light:    var(--gold-light);
+  --emerald:        var(--terracotta);      /* accent — now terracotta, not green */
+  --emerald-deep:   var(--cocoa);
+  --velvet:         #5A2E12;                /* secondary dark — now deep cocoa-brown */
+  --noir:           var(--espresso);
+  --bordeaux:       var(--velvet);
+  --champagne:      var(--gold);
+  --champagne-deep: var(--gold-deep);
+  --blush:          #EAD8C0;
+  --linen:          var(--cream);
+  --stone:          #9C8770;
+
+  /* ───────────── NEUTRALS / GREYS (warm) ───────────── */
+  --ink-900: #241712;
+  --ink-800: #2E2018;
+  --ink-700: #3A2A1E;
+  --ink-600: #4A3F35;
+  --ink-500: #6B5B49;
+  --ink-400: #8E7C66;
+  --ink-300: #B19C82;
+  --ink-200: #D1BFA1;
+  --ink-100: #E8DCC0;
+  --ink-50:  #F4ECD8;
+
+  /* ───────────── SEMANTIC — FOREGROUND ───────────── */
+  --fg-1: var(--espresso);
+  --fg-2: var(--ink-600);
+  --fg-3: var(--ink-500);
+  --fg-muted: var(--stone);
+  --fg-on-dark: var(--pearl);
+  --fg-accent: var(--gold-deep);
+
+  /* ───────────── SEMANTIC — BACKGROUND ───────────── */
+  --bg-page:    var(--ivory);
+  --bg-card:    var(--pearl);
+  --bg-raised:  #FFFFFF;
+  --bg-sunken:  var(--bone);
+  --bg-dark:    var(--espresso);
+  --bg-emerald: var(--terracotta);  /* legacy alias → terracotta feature bg */
+  --bg-terracotta: var(--terracotta);
+  --bg-velvet:  var(--velvet);
+  --bg-bordeaux:var(--velvet);
+  --bg-blush:   var(--blush);
+
+  /* ───────────── BORDERS & RULES ───────────── */
+  --border-hairline: rgba(36, 23, 18, 0.10);
+  --border-soft:     rgba(36, 23, 18, 0.18);
+  --border-strong:   rgba(36, 23, 18, 0.32);
+  --border-gold:     rgba(154, 110, 46, 0.50);
+  --border-brass:    var(--gold);
+  --border-on-dark:  rgba(251, 244, 230, 0.18);
+
+  /* ───────────── SEMANTIC STATES ───────────── */
+  --success: #4E7A3A;
+  --warn:    #B8853A;
+  --error:   #9C3A22;
+  --info:    var(--gold-deep);
+
+  /* ───────────── SPACING SCALE ───────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* ───────────── RADII ─────────────
+     Sharp & architectural. Soft, not pill. */
+  --radius-none: 0;
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-pill: 999px;
+
+  /* ───────────── SHADOWS ─────────────
+     Warm, deep, candle-lit. */
+  --shadow-xs: 0 1px 2px rgba(36, 23, 18, 0.08);
+  --shadow-sm: 0 2px 12px rgba(36, 23, 18, 0.12);
+  --shadow-md: 0 12px 32px rgba(36, 23, 18, 0.18);
+  --shadow-lg: 0 32px 72px rgba(36, 23, 18, 0.28);
+  --shadow-glow-gold: 0 0 0 1px var(--gold), 0 8px 24px rgba(201, 155, 92, 0.28);
+  --shadow-glow-brass: var(--shadow-glow-gold); /* legacy alias */
+
+  /* ───────────── TYPOGRAPHY ─────────────
+     Display (upright):  Marcellus — refined, even-stroke serif. The headline
+               face for everything. Single weight; hierarchy via size + color,
+               never faux-bold. On the homepage, emphasis is a gold-colored word.
+     Display (italic):   Cormorant Garamond italic — the editorial italic
+               companion for leads, blurbs, and emphasis (Marcellus has no
+               italic, so italic requests fall through to Cormorant). Moderate
+               contrast — legible, unlike the old Bodoni.
+     Body:     Jost — clean geometric sans for body, UI, labels, eyebrows.
+  */
+  --font-display: "Marcellus", "Cormorant Garamond", "Times New Roman", serif;
+  --font-deco:    "Marcellus", serif;
+  --font-label:   "Jost", "Helvetica Neue", system-ui, sans-serif;
+  --font-body:    "Jost", "Helvetica Neue", system-ui, sans-serif;
+  --font-mono:    ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Type scale */
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-md:   18px;
+  --text-lg:   22px;
+  --text-xl:   28px;
+  --text-2xl:  36px;
+  --text-3xl:  48px;
+  --text-4xl:  64px;
+  --text-5xl:  84px;
+  --text-6xl:  112px;
+
+  --tracking-tight:   -0.01em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.08em;
+  --tracking-wider:   0.18em;
+  --tracking-widest:  0.30em;
+
+  --leading-tight:  1.08;
+  --leading-snug:   1.20;
+  --leading-normal: 1.45;
+  --leading-relaxed:1.65;
+}
+
+/* Marcellus is single-weight — render real weights only so headings
+   stay even (no synthetic bold/oblique). */
+html { font-synthesis: none; }
+
+/* ============================================================
+   SEMANTIC TYPE STYLES
+   ============================================================ */
+
+.harav-display, .h-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-6xl);
+  line-height: var(--leading-tight);
+  letter-spacing: 0.005em;
+  color: var(--fg-1);
+}
+
+.harav-h1, .h-h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-5xl);
+  line-height: 1.05;
+  letter-spacing: 0.005em;
+  color: var(--fg-1);
+}
+
+.harav-h2, .h-h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-3xl);
+  line-height: 1.12;
+  letter-spacing: 0.005em;
+  color: var(--fg-1);
+}
+
+.harav-h3, .h-h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-2xl);
+  line-height: 1.20;
+  color: var(--fg-1);
+}
+
+.harav-h4, .h-h4 {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-lg);
+  line-height: 1.30;
+  color: var(--fg-1);
+}
+
+/* The wordmark / deco moment style */
+.harav-deco, .h-deco {
+  font-family: var(--font-deco);
+  font-weight: 400;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: var(--fg-1);
+}
+
+/* The eyebrow — uppercase label in gold */
+.harav-eyebrow, .h-eyebrow {
+  font-family: var(--font-label);
+  font-weight: 500;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--gold-deep);
+  line-height: 1.2;
+}
+
+.harav-label, .h-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  color: var(--fg-2);
+  line-height: 1.2;
+}
+
+.harav-body, .h-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-2);
+}
+
+.harav-lead, .h-lead {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-md);
+  line-height: 1.60;
+  color: var(--fg-2);
+}
+
+.harav-meta, .h-meta {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+  line-height: 1.45;
+}
+
+.harav-price, .h-price {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--text-lg);
+  font-variant-numeric: tabular-nums;
+  color: var(--gold-deep);
+  letter-spacing: 0.01em;
+}
+
+/* Decorative gold double-rule — the signature divider. */
+.harav-rule {
+  display: inline-block;
+  width: 56px;
+  height: 5px;
+  border-top: 1px solid var(--gold);
+  border-bottom: 1px solid var(--gold);
+  vertical-align: middle;
+}

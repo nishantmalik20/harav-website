@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bg-page); }
+  body { font-family: var(--font-body); color: var(--fg-1); }
+  .card { padding: 24px 28px; box-sizing: border-box; width: 700px; }
+  .eyebrow {
+    font-family: var(--font-label); font-size: 10px; font-weight: 500;
+    letter-spacing: 0.30em; text-transform: uppercase;
+    color: var(--gold-deep); margin: 0 0 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::after { content: ''; flex: 1; height: 5px;
+    border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
+</style>
+</head>
+<body>
+<div class="card">
+  <p class="eyebrow">Colors · Accent &amp; surfaces</p>
+  <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:14px;">
+
+      <div style="border:1px solid var(--border-hairline); padding:14px; background:var(--bg-card);">
+        <div style="width:28px; height:28px; background:#C36602; margin-bottom:10px;"></div>
+        <div style="font-family:var(--font-display); font-size:16px;">Terracotta</div>
+        <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-3); margin-top:2px;">Accent · #C36602</div>
+        <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-muted); margin-top:8px;">Feature cards, active state · sparingly</div>
+      </div>
+
+      <div style="border:1px solid var(--border-hairline); padding:14px; background:var(--bg-card);">
+        <div style="width:28px; height:28px; background:#33210F; margin-bottom:10px;"></div>
+        <div style="font-family:var(--font-display); font-size:16px;">Cocoa</div>
+        <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-3); margin-top:2px;">Dark panel · #33210F</div>
+        <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-muted); margin-top:8px;">Tinted dark moments</div>
+      </div>
+
+      <div style="border:1px solid var(--border-hairline); padding:14px; background:var(--bg-card);">
+        <div style="width:28px; height:28px; background:#FBF4E6; border:1px solid var(--border-hairline); margin-bottom:10px;"></div>
+        <div style="font-family:var(--font-display); font-size:16px;">Pearl</div>
+        <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-3); margin-top:2px;">Card bg · #FBF4E6</div>
+        <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-muted); margin-top:8px;">Panels & cards on cream</div>
+      </div>
+
+      <div style="border:1px solid var(--border-hairline); padding:14px; background:var(--bg-card);">
+        <div style="width:28px; height:28px; background:#EFE6D3; border:1px solid var(--border-hairline); margin-bottom:10px;"></div>
+        <div style="font-family:var(--font-display); font-size:16px;">Bone</div>
+        <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-3); margin-top:2px;">Sunken · #EFE6D3</div>
+        <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-muted); margin-top:8px;">Quiet section bands</div>
+      </div>
+
+  </div>
+</div></body></html>

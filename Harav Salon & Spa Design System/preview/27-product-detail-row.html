@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bg-page); }
+  body { font-family: var(--font-body); color: var(--fg-1); }
+  .card { padding: 24px 28px; box-sizing: border-box; width: 700px; }
+  .eyebrow {
+    font-family: var(--font-label); font-size: 10px;
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--champagne-deep); margin: 0 0 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--bone); }
+</style>
+</head>
+<body>
+<div class="card">
+  <p class="eyebrow">Components · Cart line item</p>
+  <div style="display:grid; grid-template-columns:88px 1fr auto; gap:18px; align-items:center; padding:18px 0; border-top:1px solid var(--border-hairline); border-bottom:1px solid var(--border-hairline);">
+    <div style="width:88px; aspect-ratio:4/5; overflow:hidden; background:var(--blush);">
+      <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&q=85" style="width:100%; height:100%; object-fit:cover; filter:saturate(.82) sepia(.08);">
+    </div>
+    <div>
+      <div style="font-family:var(--font-display); font-size:19px; color:var(--fg-1); margin-bottom:4px;">Quietude Hair Oil</div>
+      <div style="font-family:var(--font-label); font-size:9px; letter-spacing:0.28em; text-transform:uppercase; color:var(--fg-3); margin-bottom:10px;">Pre-wash · 50ml</div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span style="display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border:1px solid var(--border-soft); font-family:var(--font-body); font-size:14px;">−</span>
+        <span style="font-family:var(--font-display); font-size:17px; font-variant-numeric:oldstyle-nums; min-width:18px; text-align:center;">2</span>
+        <span style="display:inline-flex; align-items:center; justify-content:center; width:24px; height:24px; border:1px solid var(--border-soft); font-family:var(--font-body); font-size:14px;">+</span>
+      </div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-family:var(--font-display); font-size:19px; color:var(--fg-1); font-variant-numeric:oldstyle-nums;">$128</div>
+      <div style="font-family:var(--font-body); font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--fg-3); margin-top:6px; text-decoration:underline; text-underline-offset:3px;">Remove</div>
+    </div>
+  </div>
+</div></body></html>

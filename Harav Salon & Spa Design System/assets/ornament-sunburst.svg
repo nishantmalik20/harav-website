@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+  <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+    <g transform="translate(100 100)">
+      <line x1="0" y1="0" x2="-88.00" y2="-0.00"></line>
+      <line x1="0" y1="0" x2="-77.04" y2="-12.20"></line>
+      <line x1="0" y1="0" x2="-83.69" y2="-27.19"></line>
+      <line x1="0" y1="0" x2="-69.50" y2="-35.41"></line>
+      <line x1="0" y1="0" x2="-71.19" y2="-51.73"></line>
+      <line x1="0" y1="0" x2="-55.15" y2="-55.15"></line>
+      <line x1="0" y1="0" x2="-51.73" y2="-71.19"></line>
+      <line x1="0" y1="0" x2="-35.41" y2="-69.50"></line>
+      <line x1="0" y1="0" x2="-27.19" y2="-83.69"></line>
+      <line x1="0" y1="0" x2="-12.20" y2="-77.04"></line>
+      <line x1="0" y1="0" x2="0.00" y2="-88.00"></line>
+      <line x1="0" y1="0" x2="12.20" y2="-77.04"></line>
+      <line x1="0" y1="0" x2="27.19" y2="-83.69"></line>
+      <line x1="0" y1="0" x2="35.41" y2="-69.50"></line>
+      <line x1="0" y1="0" x2="51.73" y2="-71.19"></line>
+      <line x1="0" y1="0" x2="55.15" y2="-55.15"></line>
+      <line x1="0" y1="0" x2="71.19" y2="-51.73"></line>
+      <line x1="0" y1="0" x2="69.50" y2="-35.41"></line>
+      <line x1="0" y1="0" x2="83.69" y2="-27.19"></line>
+      <line x1="0" y1="0" x2="77.04" y2="-12.20"></line>
+      <line x1="0" y1="0" x2="88.00" y2="0.00"></line>
+      <circle cx="0" cy="0" r="4" fill="currentColor" stroke="none"></circle>
+    </g>
+  </g>
+</svg>

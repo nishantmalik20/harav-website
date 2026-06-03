@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html, body { margin: 0; padding: 0; background: var(--bg-page); }
+  body { font-family: var(--font-body); color: var(--fg-1); }
+  .card { padding: 24px 28px; box-sizing: border-box; width: 700px; }
+  .eyebrow {
+    font-family: var(--font-label); font-size: 10px;
+    letter-spacing: 0.34em; text-transform: uppercase;
+    color: var(--brass-deep); margin: 0 0 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::after { content: ''; flex: 1; height: 5px;
+    border-top: 1px solid var(--brass); border-bottom: 1px solid var(--brass); }
+</style>
+</head>
+<body>
+<div class="card">
+  <p class="eyebrow">Spacing · Brass rules</p>
+  <div style="display:flex; flex-direction:column; gap:22px;">
+    <div>
+      <div style="display:inline-block; width:120px; height:5px; border-top:1px solid var(--brass); border-bottom:1px solid var(--brass); margin-bottom:8px;"></div>
+      <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-3);">Brass double-rule — the signature deco divider · used above eyebrows &amp; section starts</div>
+    </div>
+    <div>
+      <div style="width:120px; height:1px; background:var(--brass); margin-bottom:8px;"></div>
+      <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-3);">Single brass — for inline accents (links, focus)</div>
+    </div>
+    <div>
+      <div style="height:1px; background:var(--border-hairline); margin-bottom:8px;"></div>
+      <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-3);">Hairline ink @ 10% — list dividers</div>
+    </div>
+    <div>
+      <div style="display:flex; align-items:center; gap:14px;">
+        <span style="display:inline-block; width:64px; height:5px; border-top:1px solid var(--brass); border-bottom:1px solid var(--brass);"></span>
+        <span style="font-family:var(--font-deco); font-size:13px; letter-spacing:0.28em; text-transform:uppercase; color:var(--brass-deep);">EST · MMXXIV</span>
+        <span style="display:inline-block; width:64px; height:5px; border-top:1px solid var(--brass); border-bottom:1px solid var(--brass);"></span>
+      </div>
+      <div style="font-family:var(--font-body); font-size:11px; color:var(--fg-3); margin-top:10px;">Cartouche lockup — double-rule + Marcellus label + double-rule</div>
+    </div>
+  </div>
+</div></body></html>
