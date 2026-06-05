@@ -1,0 +1,575 @@
+{
+  "generatedAt": "2026-06-05T01:29:14.463Z",
+  "currency": "CAD",
+  "mode": "test",
+  "items": {
+    "acne-advanced-clarifying-masque": {
+      "productId": "prod_Ue4hfCtsUVIR29",
+      "priceId": "price_1TemXn1Q1PSNgELbUJK8VkKm"
+    },
+    "charcoal-black-seed-clay-masque": {
+      "productId": "prod_Ue4hqN5NVNw3RN",
+      "priceId": "price_1TemXo1Q1PSNgELbFC2QBTlZ"
+    },
+    "clear-skin-probiotic-masque": {
+      "productId": "prod_Ue4h1aZmdx6Yqd",
+      "priceId": "price_1TemXp1Q1PSNgELb6GAFRMCm"
+    },
+    "raspberry-pore-refining-masque": {
+      "productId": "prod_Ue4hK3amojaqp0",
+      "priceId": "price_1TemXq1Q1PSNgELbtptPk3UV"
+    },
+    "seabuckthorn-balancing-masque": {
+      "productId": "prod_Ue4hUMP479l881",
+      "priceId": "price_1TemXq1Q1PSNgELba5sPSaQw"
+    },
+    "citrus-kale-c-e-masque": {
+      "productId": "prod_Ue4hqU2zDbLD1s",
+      "priceId": "price_1TemXr1Q1PSNgELbrp1h2ulm"
+    },
+    "snow-mushroom-reishi-masque": {
+      "productId": "prod_Ue4hPbG24j6NYu",
+      "priceId": "price_1TemXs1Q1PSNgELbSKGHZmXO"
+    },
+    "stone-crop-masque": {
+      "productId": "prod_Ue4hnKWTWRQfS7",
+      "priceId": "price_1TemXt1Q1PSNgELbC9B5gr2u"
+    },
+    "eight-greens-phyto-masque-not-hot": {
+      "productId": "prod_Ue4hg0j6M2UZQg",
+      "priceId": "price_1TemXt1Q1PSNgELbEv4CVCm3"
+    },
+    "eight-greens-phyto-masque-hot": {
+      "productId": "prod_Ue4hqeUCzn5HCR",
+      "priceId": "price_1TemXu1Q1PSNgELbiFjsGWaP"
+    },
+    "lime-stimulating-masque": {
+      "productId": "prod_Ue4hqYA5o0ci1o",
+      "priceId": "price_1TemXv1Q1PSNgELbQolHynQa"
+    },
+    "calm-skin-arnica-masque": {
+      "productId": "prod_Ue4hPAyQa9lZaS",
+      "priceId": "price_1TemXw1Q1PSNgELbYHAgmdsr"
+    },
+    "chocolate-mousse-hydration-masque": {
+      "productId": "prod_Ue4hf0QaAFFRvx",
+      "priceId": "price_1TemXw1Q1PSNgELb2LYPtNE1"
+    },
+    "pumpkin-latte-hydration-masque": {
+      "productId": "prod_Ue4hl15grHQBYv",
+      "priceId": "price_1TemXx1Q1PSNgELb5AKDcWS2"
+    },
+    "bright-skin-masque": {
+      "productId": "prod_Ue4h0GYMQxgeeU",
+      "priceId": "price_1TemXy1Q1PSNgELbR1n5Xj9F"
+    },
+    "yellow-sweet-clover-anti-redness-masque": {
+      "productId": "prod_Ue4hhOSNLefAxa",
+      "priceId": "price_1TemXz1Q1PSNgELb6Sid5NbW"
+    },
+    "strawberry-rhubarb-masque": {
+      "productId": "prod_Ue4hOgXrp7kGmK",
+      "priceId": "price_1TemXz1Q1PSNgELbKVkfRskC"
+    },
+    "firm-skin-acai-masque": {
+      "productId": "prod_Ue4hWcLw1VyGhT",
+      "priceId": "price_1TemY01Q1PSNgELbIqfPoSNS"
+    },
+    "bamboo-age-corrective-masque": {
+      "productId": "prod_Ue4hoOpywMXyFV",
+      "priceId": "price_1TemY11Q1PSNgELbPy4pQKvg"
+    },
+    "mango-exfoliating-enzyme-masque": {
+      "productId": "prod_Ue4hqCMD77d56a",
+      "priceId": "price_1TemY11Q1PSNgELbfMmZdSE4"
+    },
+    "kombucha-microbiome-leave-on-masque": {
+      "productId": "prod_Ue4h6mVDDsvxtE",
+      "priceId": "price_1TemY21Q1PSNgELbMLi5oOV0"
+    },
+    "linden-calendula-treatment": {
+      "productId": "prod_Ue4hCgAt4HTjpR",
+      "priceId": "price_1TemY41Q1PSNgELbRR8ltzG4"
+    },
+    "superfood-booster-powder": {
+      "productId": "prod_Ue4hIFJfbiYFJw",
+      "priceId": "price_1TemY51Q1PSNgELbl24MX0ie"
+    },
+    "turmeric-energizing-treatment": {
+      "productId": "prod_Ue4hPdSTyAnlTP",
+      "priceId": "price_1TemY51Q1PSNgELbG3Ba1KEk"
+    },
+    "hibiscus-line-filler": {
+      "productId": "prod_Ue4hRigPbIq03j",
+      "priceId": "price_1TemY61Q1PSNgELb3w8cn9af"
+    },
+    "tetrapeptide-lifting-gel": {
+      "productId": "prod_Ue4hser5X8mJne",
+      "priceId": "price_1TemY71Q1PSNgELbuvPU2fY4"
+    },
+    "marine-flower-peptide-concentrate": {
+      "productId": "prod_Ue4hxxxoF0qHB9",
+      "priceId": "price_1TemY71Q1PSNgELbUDB1z0Z3"
+    },
+    "mangosteen-daily-resurfacing-concentrate": {
+      "productId": "prod_Ue4hkpRPH75MQc",
+      "priceId": "price_1TemY81Q1PSNgELbEjjLoBhP"
+    },
+    "bamboo-firming-fluid": {
+      "productId": "prod_Ue4h9VI79TSHLi",
+      "priceId": "price_1TemY91Q1PSNgELblAI8YVjk"
+    },
+    "lavender-age-corrective-night-concentrate": {
+      "productId": "prod_Ue4hPALibdgbye",
+      "priceId": "price_1TemYA1Q1PSNgELbLS3L4Noa"
+    },
+    "charcoal-black-seed-clarifying-oil": {
+      "productId": "prod_Ue4hgs2qRCCnGW",
+      "priceId": "price_1TemYA1Q1PSNgELbM4oxhAPd"
+    },
+    "rosehip-triple-c-e-firming-oil": {
+      "productId": "prod_Ue4hqT9nspFHwX",
+      "priceId": "price_1TemYB1Q1PSNgELbSrvqgvAj"
+    },
+    "facial-recovery-oil": {
+      "productId": "prod_Ue4hJii6cQjwjo",
+      "priceId": "price_1TemYC1Q1PSNgELbHUNfqXRa"
+    },
+    "camellia-glow-solid-face-oil": {
+      "productId": "prod_Ue4hNhb81gfLUF",
+      "priceId": "price_1TemYC1Q1PSNgELbHl0NdNtg"
+    },
+    "eight-greens-youth-serum": {
+      "productId": "prod_Ue4hquTvLPrInB",
+      "priceId": "price_1TemYD1Q1PSNgELbkQ9bPoXd"
+    },
+    "citrus-kale-c-e-serum": {
+      "productId": "prod_Ue4hA4scGLXJZn",
+      "priceId": "price_1TemYE1Q1PSNgELb29lpFogr"
+    },
+    "kombucha-microbiome-luminosity-serum": {
+      "productId": "prod_Ue4hcHt5W5FxiG",
+      "priceId": "price_1TemYF1Q1PSNgELbVCP6b7mi"
+    },
+    "stone-crop-serum": {
+      "productId": "prod_Ue4hb55uASDuUf",
+      "priceId": "price_1TemYF1Q1PSNgELbeG36eNk5"
+    },
+    "marine-flower-peptide-serum": {
+      "productId": "prod_Ue4htXHYlBKyud",
+      "priceId": "price_1TemYG1Q1PSNgELbApvowaZo"
+    },
+    "strawberry-rhubarb-hyaluronic-serum": {
+      "productId": "prod_Ue4hbdsYw9P5fr",
+      "priceId": "price_1TemYH1Q1PSNgELb5Y5tVrU8"
+    },
+    "cornflower-recovery-serum": {
+      "productId": "prod_Ue4hRsOyTwBnXC",
+      "priceId": "price_1TemYH1Q1PSNgELb0WSGYIRr"
+    },
+    "clear-skin-booster-serum": {
+      "productId": "prod_Ue4h6RbwVsWa8K",
+      "priceId": "price_1TemYI1Q1PSNgELbrVOW5Mkw"
+    },
+    "calm-skin-booster-serum": {
+      "productId": "prod_Ue4hKdR1MbhOmB",
+      "priceId": "price_1TemYJ1Q1PSNgELbSxTa9qNX"
+    },
+    "bright-skin-booster-serum": {
+      "productId": "prod_Ue4hCPWcD56nVx",
+      "priceId": "price_1TemYK1Q1PSNgELbxJwnvGr5"
+    },
+    "firm-skin-booster-serum": {
+      "productId": "prod_Ue4h8WIwQDEA7C",
+      "priceId": "price_1TemYK1Q1PSNgELbHUXHDuDJ"
+    },
+    "copper-tripeptide-serum": {
+      "productId": "prod_Ue4ht0MuEG6W2r",
+      "priceId": "price_1TemYL1Q1PSNgELboP77t9mK"
+    },
+    "acne-advanced-clarifying-hydrator": {
+      "productId": "prod_Ue4hjvWFewoCUT",
+      "priceId": "price_1TemYM1Q1PSNgELbocfDd9Qu"
+    },
+    "strawberry-rhubarb-hyaluronic-hydrator": {
+      "productId": "prod_Ue4h7fJj9gNIZd",
+      "priceId": "price_1TemYN1Q1PSNgELbMWRX9IC5"
+    },
+    "mangosteen-gel-moisturizer": {
+      "productId": "prod_Ue4h9wmmNshO69",
+      "priceId": "price_1TemYO1Q1PSNgELbw9eCtz3L"
+    },
+    "echinacea-recovery-cream": {
+      "productId": "prod_Ue4hMzp6KZc3ZB",
+      "priceId": "price_1TemYO1Q1PSNgELbZC8atvA9"
+    },
+    "clear-skin-probiotic-moisturizer": {
+      "productId": "prod_Ue4hASiyDQXMxI",
+      "priceId": "price_1TemYP1Q1PSNgELbJjpEunHC"
+    },
+    "lilikoi-daily-defense-moisturizer-spf-40": {
+      "productId": "prod_Ue4h3aDUbXvacx",
+      "priceId": "price_1TemYQ1Q1PSNgELbfBnnvoj1"
+    },
+    "apricot-whip-moisturizer": {
+      "productId": "prod_Ue4hMX3bytghA0",
+      "priceId": "price_1TemYR1Q1PSNgELb9NgAkWOw"
+    },
+    "bright-skin-moisturizer-spf-40": {
+      "productId": "prod_Ue4hZQkSsQCtUY",
+      "priceId": "price_1TemYR1Q1PSNgELbMio8uMzx"
+    },
+    "daily-defense-tinted-spf-50": {
+      "productId": "prod_Ue4hT6o8f9YfY5",
+      "priceId": "price_1TemYS1Q1PSNgELbCiyKd0P1"
+    },
+    "stone-crop-whip-moisturizer": {
+      "productId": "prod_Ue4hJRx7sIbWkf",
+      "priceId": "price_1TemYT1Q1PSNgELbawDimXJA"
+    },
+    "arctic-berry-peptide-radiance-cream": {
+      "productId": "prod_Ue4hnTAIllIO3v",
+      "priceId": "price_1TemYT1Q1PSNgELbbTYZqVSj"
+    },
+    "bakuchiol-niacinamide-moisturizer": {
+      "productId": "prod_Ue4hNmQlV2bByX",
+      "priceId": "price_1TemYU1Q1PSNgELbrRwB4Pkf"
+    },
+    "calm-skin-chamomile-moisturizer": {
+      "productId": "prod_Ue4hfAgHtkNvs3",
+      "priceId": "price_1TemYV1Q1PSNgELbiW1O9mQs"
+    },
+    "apricot-calendula-nourishing-cream": {
+      "productId": "prod_Ue4hzeqdmNa8Fm",
+      "priceId": "price_1TemYW1Q1PSNgELbJ5jQyVrY"
+    },
+    "blueberry-soy-night-recovery-cream": {
+      "productId": "prod_Ue4hbCctVdTsF8",
+      "priceId": "price_1TemYW1Q1PSNgELbGN2bYfRx"
+    },
+    "firm-skin-acai-moisturizer": {
+      "productId": "prod_Ue4hmdsA4XCz5a",
+      "priceId": "price_1TemYX1Q1PSNgELb5myLJ7WD"
+    },
+    "hibiscus-ultra-lift-neck-cream": {
+      "productId": "prod_Ue4huqg7iDoCec",
+      "priceId": "price_1TemYY1Q1PSNgELbOsb6ztmo"
+    },
+    "radiant-protection-spf-fluid": {
+      "productId": "prod_Ue4h46xYzaH9HN",
+      "priceId": "price_1TemYY1Q1PSNgELblVrzY5ap"
+    },
+    "marine-flower-peptide-night-cream": {
+      "productId": "prod_Ue4hQDbuh0RQpH",
+      "priceId": "price_1TemYZ1Q1PSNgELblaubn6jl"
+    },
+    "coconut-age-corrective-moisturizer": {
+      "productId": "prod_Ue4iUYCLBmHHuP",
+      "priceId": "price_1TemYa1Q1PSNgELbKTEUMVFH"
+    },
+    "bright-skin-overnight-correcting-cream": {
+      "productId": "prod_Ue4i11cHfx5Bfv",
+      "priceId": "price_1TemYb1Q1PSNgELb5ZmFmH0o"
+    },
+    "monoi-age-corrective-night-cream-for-face-neck": {
+      "productId": "prod_Ue4i9caheG5mHa",
+      "priceId": "price_1TemYb1Q1PSNgELbFQbjXoLz"
+    },
+    "ashwagandha-ultra-rich-restorative-cream": {
+      "productId": "prod_Ue4in3Z6FwK5Pz",
+      "priceId": "price_1TemYc1Q1PSNgELbqx0iaKZ4"
+    },
+    "ceramide-repair-balm": {
+      "productId": "prod_Ue4iAX7ik4Lnu6",
+      "priceId": "price_1TemYd1Q1PSNgELblxta9cym"
+    },
+    "sun-defense-minerals-spf-30": {
+      "productId": "prod_Ue4in0BoYQeyhE",
+      "priceId": "price_1TemYd1Q1PSNgELbgbsjnj3q"
+    },
+    "lilikoi-mineral-defense-sport-sunscreen-spf-30": {
+      "productId": "prod_Ue4idlVScj8nAP",
+      "priceId": "price_1TemYe1Q1PSNgELbskATHuj5"
+    },
+    "clear-skin-starter-set": {
+      "productId": "prod_Ue4ieVxeCA1Wnv",
+      "priceId": "price_1TemYf1Q1PSNgELb1qfx5CWT"
+    },
+    "bright-skin-starter-set": {
+      "productId": "prod_Ue4iaNIA3WEk09",
+      "priceId": "price_1TemYf1Q1PSNgELbeLyJoU8M"
+    },
+    "calm-skin-starter-set": {
+      "productId": "prod_Ue4iIIN9fejRF6",
+      "priceId": "price_1TemYg1Q1PSNgELbKtP6fxKL"
+    },
+    "firm-skin-starter-set": {
+      "productId": "prod_Ue4iuw09GKwTWG",
+      "priceId": "price_1TemYh1Q1PSNgELb6VG21oUE"
+    },
+    "must-have-minis-starter-set": {
+      "productId": "prod_Ue4ivQBtHIpSW3",
+      "priceId": "price_1TemYi1Q1PSNgELbZTNS73Pq"
+    },
+    "acne-advanced-trio": {
+      "productId": "prod_Ue4iXHuZNcKHvT",
+      "priceId": "price_1TemYi1Q1PSNgELbLBnqv1B4"
+    },
+    "age-corrective-starter-set": {
+      "productId": "prod_Ue4ifcYFj6GrhJ",
+      "priceId": "price_1TemYj1Q1PSNgELbwq7S9xkd"
+    },
+    "radiance-renewal-set": {
+      "productId": "prod_Ue4iNcGb2eRsDI",
+      "priceId": "price_1TemYk1Q1PSNgELbC07p4udC"
+    },
+    "arctic-berry-peel-peptide-illuminating-system": {
+      "productId": "prod_Ue4iO5ocGYYFhW",
+      "priceId": "price_1TemYl1Q1PSNgELbyaicWsyR"
+    },
+    "cryo-thermal-sculpting-tool": {
+      "productId": "prod_Ue4ipkXSb25M1J",
+      "priceId": "price_1TemYm1Q1PSNgELbGPhTWYxi"
+    },
+    "strawberry-rhubarb-hyaluronic-body-lotion": {
+      "productId": "prod_Ue4i10x65hbnWy",
+      "priceId": "price_1TemYm1Q1PSNgELbPjxR3zfr"
+    },
+    "quince-nourishing-body-lotion": {
+      "productId": "prod_Ue4iVH3AT1RFEj",
+      "priceId": "price_1TemYn1Q1PSNgELburVZHKDB"
+    },
+    "mangosteen-body-lotion": {
+      "productId": "prod_Ue4iJ6ieMUnYre",
+      "priceId": "price_1TemYo1Q1PSNgELbGDz2vuH3"
+    },
+    "mangosteen-replenishing-hand-cream": {
+      "productId": "prod_Ue4igJDU0zauo8",
+      "priceId": "price_1TemYo1Q1PSNgELbNu4M7kBq"
+    },
+    "stone-crop-contouring-body-lotion": {
+      "productId": "prod_Ue4izG0owy9dIE",
+      "priceId": "price_1TemYp1Q1PSNgELb1sIUpA9l"
+    },
+    "stone-crop-body-lotion": {
+      "productId": "prod_Ue4iPbLED2g1fm",
+      "priceId": "price_1TemYq1Q1PSNgELboMydJDC1"
+    },
+    "coconut-firming-body-lotion": {
+      "productId": "prod_Ue4is8GsGf5hnS",
+      "priceId": "price_1TemYq1Q1PSNgELbqNP0wfhu"
+    },
+    "monoi-age-corrective-body-lotion": {
+      "productId": "prod_Ue4ihOWjSmfosE",
+      "priceId": "price_1TemYr1Q1PSNgELbU6k8Vdcw"
+    },
+    "shea-butter-mint-moisture-balm": {
+      "productId": "prod_Ue4iDok54HoSkc",
+      "priceId": "price_1TemYs1Q1PSNgELbi3ZazqVY"
+    },
+    "vanilla-mint-hand-cream": {
+      "productId": "prod_Ue4iDPkc7ClM4l",
+      "priceId": "price_1TemYt1Q1PSNgELbte5QJNIY"
+    },
+    "stone-crop-body-oil": {
+      "productId": "prod_Ue4iOzlWClECDf",
+      "priceId": "price_1TemYt1Q1PSNgELbE7BGrFww"
+    },
+    "apricot-body-oil": {
+      "productId": "prod_Ue4iQ7mv0w6px7",
+      "priceId": "price_1TemYu1Q1PSNgELbjVSKOeKI"
+    },
+    "yuzu-solid-body-oil": {
+      "productId": "prod_Ue4ihbS0QvWbkD",
+      "priceId": "price_1TemYv1Q1PSNgELbMTIJbUXE"
+    },
+    "stone-crop-revitalizing-body-scrub": {
+      "productId": "prod_Ue4iWd3PTERX2l",
+      "priceId": "price_1TemYv1Q1PSNgELbs82Xgfgl"
+    },
+    "cranberry-pomegranate-sugar-scrub": {
+      "productId": "prod_Ue4idyUZfD6GsT",
+      "priceId": "price_1TemYw1Q1PSNgELbTfwPRygl"
+    },
+    "coconut-sugar-scrub": {
+      "productId": "prod_Ue4i9hZW0MoMJG",
+      "priceId": "price_1TemYx1Q1PSNgELbaNTZHQd2"
+    },
+    "marine-flower-peptide-lip-serum": {
+      "productId": "prod_Ue4iTxrfSe7rXS",
+      "priceId": "price_1TemYy1Q1PSNgELbHHkNquww"
+    },
+    "lip-trio": {
+      "productId": "prod_Ue4iJwsKr4l0cE",
+      "priceId": "price_1TemYy1Q1PSNgELbSFVkXIkF"
+    },
+    "citrus-lip-balm": {
+      "productId": "prod_Ue4iAisKxG2AYg",
+      "priceId": "price_1TemYz1Q1PSNgELbn3mpMRjt"
+    },
+    "rosehip-lemongrass-lip-balm-spf-15": {
+      "productId": "prod_Ue4iYSCuljjbPO",
+      "priceId": "price_1TemZ01Q1PSNgELbEEC33Zya"
+    },
+    "herbal-eye-makeup-remover": {
+      "productId": "prod_Ue4iXY8fVhje4M",
+      "priceId": "price_1TemZ01Q1PSNgELbaIIgGeGj"
+    },
+    "hibiscus-ultra-lift-eye-cream": {
+      "productId": "prod_Ue4iH6AHiORPM7",
+      "priceId": "price_1TemZ11Q1PSNgELbdaz2DIv3"
+    },
+    "neroli-age-corrective-eye-serum": {
+      "productId": "prod_Ue4iFJnjBdeKaM",
+      "priceId": "price_1TemZ21Q1PSNgELbRF9dSZIP"
+    },
+    "wild-plum-eye-cream": {
+      "productId": "prod_Ue4i23QTXRGpVu",
+      "priceId": "price_1TemZ21Q1PSNgELbqjhzkiKh"
+    },
+    "bearberry-eye-repair-cream": {
+      "productId": "prod_Ue4iVEBxAvwv5n",
+      "priceId": "price_1TemZ31Q1PSNgELb3b4OKM4o"
+    },
+    "marine-flower-peptide-eye-cream": {
+      "productId": "prod_Ue4i0K9AcrjQP0",
+      "priceId": "price_1TemZ41Q1PSNgELbk5Fo4t49"
+    },
+    "snow-mushroom-moisture-cloud-eye-cream": {
+      "productId": "prod_Ue4izOkPlUW8Ow",
+      "priceId": "price_1TemZ51Q1PSNgELbtz5NjXpw"
+    },
+    "lavender-age-corrective-night-eye-cream": {
+      "productId": "prod_Ue4iHZzowfTJrN",
+      "priceId": "price_1TemZ51Q1PSNgELbHKPwZfEA"
+    },
+    "acne-advanced-cleansing-foam": {
+      "productId": "prod_Ue4iHywzhUVwRn",
+      "priceId": "price_1TemZ61Q1PSNgELbngjUf7mN"
+    },
+    "kombucha-microbiome-foaming-cleanser": {
+      "productId": "prod_Ue4iZI0g1iwB2J",
+      "priceId": "price_1TemZ71Q1PSNgELb9mr19RPk"
+    },
+    "charcoal-exfoliating-gel-cleanser": {
+      "productId": "prod_Ue4imJ9fcWhOKo",
+      "priceId": "price_1TemZ71Q1PSNgELbdquNmwgH"
+    },
+    "mangosteen-daily-resurfacing-cleanser": {
+      "productId": "prod_Ue4iNv6KQrv9UL",
+      "priceId": "price_1TemZ81Q1PSNgELbHFdDltuY"
+    },
+    "stone-crop-gel-wash": {
+      "productId": "prod_Ue4iQydjFnsGDG",
+      "priceId": "price_1TemZ91Q1PSNgELbhVSuPscQ"
+    },
+    "clear-skin-probiotic-cleanser": {
+      "productId": "prod_Ue4ivbBPWfbjdy",
+      "priceId": "price_1TemZ91Q1PSNgELbZyAYQvWS"
+    },
+    "lemon-grass-cleanser": {
+      "productId": "prod_Ue4iaHtun7QKV0",
+      "priceId": "price_1TemZA1Q1PSNgELbYHRlodE3"
+    },
+    "monoi-age-corrective-exfoliating-cleanser": {
+      "productId": "prod_Ue4iz9phIcPBOU",
+      "priceId": "price_1TemZB1Q1PSNgELbygWgWwtM"
+    },
+    "bright-skin-cleanser": {
+      "productId": "prod_Ue4ihYZAAxDjaU",
+      "priceId": "price_1TemZC1Q1PSNgELbhjRajkT0"
+    },
+    "calm-skin-chamomile-cleanser": {
+      "productId": "prod_Ue4i6xIqsBr3Nj",
+      "priceId": "price_1TemZC1Q1PSNgELbn8SHfqkY"
+    },
+    "barbados-cherry-enzyme-cleansing-powder": {
+      "productId": "prod_Ue4ivpqr8wRIhw",
+      "priceId": "price_1TemZD1Q1PSNgELb1LJrvt7r"
+    },
+    "firm-skin-acai-cleanser": {
+      "productId": "prod_Ue4iVNeLW2Mxqk",
+      "priceId": "price_1TemZE1Q1PSNgELb6YDWqgmD"
+    },
+    "coconut-milk-cleanser": {
+      "productId": "prod_Ue4ijWIWKl4dlW",
+      "priceId": "price_1TemZE1Q1PSNgELbs2DMsZhP"
+    },
+    "stone-crop-cleansing-oil": {
+      "productId": "prod_Ue4iSC6lgJ29S3",
+      "priceId": "price_1TemZF1Q1PSNgELbPmNS7hbL"
+    },
+    "tulsi-snow-mushroom-cleansing-milk": {
+      "productId": "prod_Ue4iFTX49zADTF",
+      "priceId": "price_1TemZG1Q1PSNgELbLYNgNj8d"
+    },
+    "lime-refresh-tonique": {
+      "productId": "prod_Ue4iaQ0KqCPmcw",
+      "priceId": "price_1TemZH1Q1PSNgELbLwFkHi3Z"
+    },
+    "mangosteen-revitalizing-mist": {
+      "productId": "prod_Ue4iMhiQii3Ceo",
+      "priceId": "price_1TemZH1Q1PSNgELbVm94eP3Q"
+    },
+    "stone-crop-hydrating-mist": {
+      "productId": "prod_Ue4iudSe7DLcvV",
+      "priceId": "price_1TemZI1Q1PSNgELbaZTjlIvu"
+    },
+    "hawthorn-tonique": {
+      "productId": "prod_Ue4i8B6LqUfAby",
+      "priceId": "price_1TemZJ1Q1PSNgELbEc1amaQG"
+    },
+    "soothing-chamomile-tonique": {
+      "productId": "prod_Ue4iEaemLqrLbs",
+      "priceId": "price_1TemZJ1Q1PSNgELbstuoKMEH"
+    },
+    "neroli-age-corrective-hydrating-mist": {
+      "productId": "prod_Ue4i4UVNDz65BG",
+      "priceId": "price_1TemZK1Q1PSNgELbG4Y7gSwb"
+    },
+    "kombucha-microbiome-balancing-essence": {
+      "productId": "prod_Ue4iZam0TftnIW",
+      "priceId": "price_1TemZL1Q1PSNgELbV8EptFKi"
+    },
+    "pineapple-refining-tonique": {
+      "productId": "prod_Ue4ioCnllHphG9",
+      "priceId": "price_1TemZM1Q1PSNgELbCYHdOt3M"
+    },
+    "shiitake-ashwagandha-bi-phase-mist": {
+      "productId": "prod_Ue4i8VmDXGC4LK",
+      "priceId": "price_1TemZM1Q1PSNgELbbch0iePt"
+    },
+    "calm-skin-exfoliating-peel": {
+      "productId": "prod_Ue4ie3CfMHm5Ux",
+      "priceId": "price_1TemZN1Q1PSNgELbd1JuGuZ9"
+    },
+    "radish-seed-refining-peel": {
+      "productId": "prod_Ue4izHlVy608Ae",
+      "priceId": "price_1TemZO1Q1PSNgELbNaVJQ6MW"
+    },
+    "stone-crop-oxygenating-fizzofoliant": {
+      "productId": "prod_Ue4i24YqVujxYi",
+      "priceId": "price_1TemZO1Q1PSNgELbaSPWIc0R"
+    },
+    "strawberry-rhubarb-dermafoliant": {
+      "productId": "prod_Ue4izim1y5GdvI",
+      "priceId": "price_1TemZP1Q1PSNgELbqQ422YWY"
+    },
+    "bright-skin-exfoliating-peel": {
+      "productId": "prod_Ue4iqGvw14kGvZ",
+      "priceId": "price_1TemZQ1Q1PSNgELbOw4agfYA"
+    },
+    "clear-skin-exfoliating-peel": {
+      "productId": "prod_Ue4ixWHpDAuuGr",
+      "priceId": "price_1TemZQ1Q1PSNgELbDcFDVufG"
+    },
+    "firm-skin-exfoliating-peel": {
+      "productId": "prod_Ue4iC4OsK4mBh8",
+      "priceId": "price_1TemZR1Q1PSNgELbUFin6pIr"
+    },
+    "yam-pumpkin-enzyme-peel-5": {
+      "productId": "prod_Ue4ihXlDbLrav5",
+      "priceId": "price_1TemZS1Q1PSNgELbmXcO5biG"
+    }
+  }
+}

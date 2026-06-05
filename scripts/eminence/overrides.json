@@ -1,0 +1,28 @@
+{
+  "_comment": "Maps client price-list names to the exact eminenceorganics.com product slug, for items the auto-matcher missed or matched wrongly. Verified against the sitemap.",
+
+  "Citrus & Kale C+E Masque": "citrus-kale-potent-ce-masque",
+  "Citrus & Kale C+E Serum": "citrus-kale-potent-ce-serum",
+  "Rosehip Triple C+E Firming Oil": "rosehip-triple-ce-firming-oil",
+  "Acne Advanced Trio": "acne-advanced-3-step-treatment-system",
+  "Herbal Eye Makeup Remover": "herbal-eye-make-up-remover",
+
+  "Hibiscus Line Filler": "hibiscus-instant-line-filler",
+  "Daily Defense Tinted SPF 50+": "daily-defense-tinted-spf",
+  "Sun Defense Minerals SPF 30": "sun-defense-minerals",
+  "Lavender Age Corrective Night Eye Cream": "lavender-night-eye-cream",
+
+  "Clear Skin Booster-Serum": "clear-skin-willow-bark-booster-serum",
+  "Calm Skin Booster-Serum": "calm-skin-arnica-booster-serum",
+  "Bright Skin Booster-Serum": "bright-skin-licorice-root-booster-serum",
+  "Firm Skin Booster-Serum": "firm-skin-acai-booster-serum",
+
+  "Calm Skin Exfoliating Peel": "calm-skin-chamomile-exfoliating-peel",
+  "Bright Skin Exfoliating Peel": "bright-skin-licorice-root-exfoliating-peel",
+  "Clear Skin Exfoliating Peel": "clear-skin-willow-bark-exfoliating-peel",
+  "Firm Skin Exfoliating Peel": "firm-skin-acai-exfoliating-peel",
+
+  "_note_body_cream": "Client lists these as 'Body Lotion'; Eminence's actual product is a 'Body Cream'. Same product, client name kept.",
+  "Stone Crop Contouring Body Lotion": "stone-crop-contouring-body-cream",
+  "Monoi Age Corrective Body Lotion": "monoi-age-corrective-night-body-cream"
+}
