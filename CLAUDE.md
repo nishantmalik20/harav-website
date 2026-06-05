@@ -77,13 +77,17 @@ Actual values are never written here — this is just the reference list.
 ```
 # Resend
 RESEND_API_KEY=
+ORDERS_NOTIFY_EMAIL=        # product order alerts (falls back to BOOKINGS_NOTIFY_EMAIL)
 
-# Stripe (if used)
+# Stripe (booking deposit + product checkout)
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 STRIPE_SECRET_KEY=
 STRIPE_WEBHOOK_SECRET=
 
-# Supabase (if used)
+# Boutique gate — "true" only after Stripe is set up and `npm run stripe:sync` has run
+NEXT_PUBLIC_STORE_ENABLED=
+
+# Supabase (bookings + admin auth only)
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
@@ -102,7 +106,7 @@ Use this section for anything unique to this client or project that Claude Code
 should always keep in mind.
 
 - This client's brand voice is formal and professional — no casual language in copy
-- The store has around 50 products — all product data is seeded in Supabase
+- The boutique = ~142 Éminence SKUs (`data/products.json`). Product catalog + checkout now live in **Stripe** (Products/Prices via `npm run stripe:sync`), gated behind `NEXT_PUBLIC_STORE_ENABLED`. Supabase is bookings + admin auth only (no product/order tables).
 - The 100% customer base for this business are women.
 - This business is looking for a very smooth booking form experience.
 - Homepage hero must load in under 1.5s — prioritise performance here above all
@@ -117,8 +121,8 @@ should always keep in mind.
 > Update this section at the end of each working session so the next session
 > picks up exactly where you left off.
 
-**Last updated:** 2026-06-03
-**Phase:** Frontend + Backend build complete; pushed to GitHub. Awaiting Vercel link + env keys.
+**Last updated:** 2026-06-05
+**Phase:** Phase 1 complete + integrations wired in TEST mode (Stripe, Resend, Supabase). Boutique flipped ON locally. Big UI/content polish batch done (see In Progress). Next: client to confirm booking-form conditions → finalise bookings schema → run Supabase migration → rebuild booking form. Then Vercel link + LIVE keys.
 
 ### Completed
 - [x] Design spec received and reviewed (homepage + shop & portal UI kits)
@@ -129,13 +133,20 @@ should always keep in mind.
 - [x] Project scaffolded (Next.js 15 + TS + Tailwind v4; hand-rolled shadcn-style primitives — no interactive CLIs)
 - [x] Frontend build → all Phase 1 pages, sections, layout, booking UI, admin UI (code)
 - [x] Backend build → Supabase clients + RLS migration, Stripe deposit flow, Resend emails, API routes, server actions
-- [x] `npm run build` verified GREEN (24 routes) on NTFS — see exFAT blocker below
+- [x] `npm run build` verified GREEN locally on D: (169 prerendered pages) — readlink shim added (`scripts/build.cjs` + `scripts/patch-node24-readlink.cjs`); `build` script now runs `node scripts/build.cjs`
 - [x] Pushed to GitHub → github.com/nishantmalik20/harav-website (branches: main = production, dev = working; currently on dev)
-- [ ] Environment variables configured (`.env.example` created; real keys pending)
+- [x] Hero reworked → rotating boutique highlight (`hero-boutique.tsx`) replacing the hours card; signals services + retail
+- [x] Boutique moved Supabase → **Stripe**: `scripts/stripe/sync-products.mjs` (`npm run stripe:sync`) pushes catalog → Stripe Products/Prices (`data/stripe-prices.json` map); cart (`components/shop/cart-*`) + `/api/checkout` + order webhook branch + order emails; gated by `NEXT_PUBLIC_STORE_ENABLED`. Dropped Supabase `0002_products` migration/seed.
+- [x] Environment configured in TEST mode (`.env.local`, gitignored): Stripe test keys + webhook secret via `stripe listen`, 142 products synced (`npm run stripe:sync`), `NEXT_PUBLIC_STORE_ENABLED=true`; Resend (haravsalonspa.ca verified, single `contact@haravsalonspa.ca` for from+notify, live test send OK); Supabase (legacy anon + service_role keys, admin user `admin@haravsalonspa.ca` created via Auth). LIVE keys still pending.
+- [ ] **Supabase tables NOT yet created** — migration `supabase/migrations/0001_init.sql` still needs running in the SQL editor (intentionally deferred until the booking-form redesign so the bookings schema is final; bookings + newsletter writes will fail until then)
 - [ ] Vercel project linked to the GitHub repo
 
 ### In Progress
-- Build complete & verified. Awaiting env provisioning + walkthrough before the SEO agent.
+- **Booking-form redesign (next session)** — client is confirming a list of booking conditions (conditional fields, availability rules, deposit logic). The Supabase migration is PAUSED on purpose until the bookings schema is final (run it once). Resume order: get conditions → lock data model → run migration → build form frontend-first → re-enforce every money/data rule server-side.
+- **2026-06-05 polish batch DONE** (on `dev`, not yet committed): "Reserve"→"Book" CTA sitewide; replaced AVITANE-branded massage photo with a brand-free spa image (`public/images/proof-room.jpg`); fixed hero variable-height — real cause was `lg:justify-self-end` making the boutique card shrink-to-fit the product-name width, which (via the `aspect-[4/5]` image box) drove its height; fixed by pinning the card to `lg:w-[360px]` in `hero-boutique.tsx` (plus the earlier fixed name block + line-clamp); product-card images now `object-contain` (uniform, no edge-bleed); quick "Add to bag" on cards (`components/shop/quick-add.tsx`); new FAQ section + FAQPage JSON-LD (`components/sections/faq.tsx`, `lib/faq.ts`) on home; journal expanded to 9 long SEO articles w/ block model + BlogPosting JSON-LD (`lib/journal.ts` + journal `[slug]`); deepened homepage copy (hero, brand-intro, services-menu) and fixed "skin & hair care" → "skincare & beauty". `npx tsc --noEmit` GREEN.
+- **2026-06-05 (batch 2) — ecommerce DONE:** product cards now show a short description + star rating + Add to bag (Éminence-style); shop filters moved from the top rail to a **left sidebar** (`shop-catalog.tsx`, category + concern, collapsible on mobile); **unique order number** `HRV-XXXXXX` generated at checkout (`lib/order.ts`), stored on the Stripe session + PaymentIntent metadata (searchable in Dashboard) and shown on `/shop/success` with an order summary read back from the session; `lib/email.ts` rewritten with a **branded shell** (gold HARAV wordmark, support line, "The Harav Team", address) used by all emails — order confirmation (customer) + notification (salon) now include the order number; **contact-form auto-reply** added (`sendContactAutoReply`). Verified live: real checkout session carried `HRV-DDMSEF`; success page rendered it; test contact + order emails sent via Resend with no errors. Webhook delivery needs `stripe listen` running locally (or the prod webhook) — that was the reason emails weren't arriving before.
+- ⚠️ **Star ratings are PLACEHOLDER/FAKE** (`lib/ratings.ts`, deterministic per slug). Per CLAUDE.md's own discovery note, invented reviews on a LIVE site risk Canada's Competition Act / FTC. Built as requested pre-launch and centralised at one swap-point — **decide before production**: wire real reviews, or remove the rating UI.
+- **Flagged, not done:** `public/images/about-room-1.jpg` (hair-styling chairs + neon text) and `about-room-2.jpg` (VERB-branded hair products) are off-brand for a women-only, no-hair salon — replace later. Mobile responsiveness reviewed at code level (mobile-first throughout) but NOT pixel-verified on a true phone viewport (Chrome window wouldn't shrink in automation) — worth a real-device spot check. `contact@haravsalonspa.ca` still needs to be a real *inbox* to receive salon notifications (sending works; receiving depends on the mailbox).
 
 ### Known facts (locked this session)
 - Real menu = Facials · Body Sugaring · Waxing/Threading · Lash & Brow · Nails · Massage. This is the COMPLETE offering — no hair styling, makeup, laser hair removal, spray tan, or men's. Homepage Facial/Hair/Makeup cards are placeholders → re-map. Prices CAD per the xlsx.
@@ -143,7 +154,7 @@ should always keep in mind.
 - Photography = none yet (new business) → use curated LUXURY STOCK matching the warm/gilded/low-lit theme; swap for a real shoot later. Hero < 1.5s.
 - Deposit = $20 Stripe deposit on a subset: all Facials; Sugaring Full Legs; Waxing Full Body ±Brazilian; 60-min Massage; Lashes (Sweet YY, Classic, Lift+Tint, Sweet Lash Lift); Nails (Gel Nails, Nail Fill). Deposit is NON-REFUNDABLE. → Stripe needed at launch for deposits; product checkout still P2.
 - Booking = custom, in-house build (no third-party widget).
-- Phasing: Phase 1 = marketing site + booking + STAFF ADMIN dashboard (`/admin`). Phase 2 (deferred) = product boutique (Supabase/Stripe; product data migrated later) + Orders view in admin.
+- Phasing: Phase 1 = marketing site + booking + STAFF ADMIN dashboard (`/admin`). Boutique brought forward & built on **Stripe** (2026-06-04): catalog + checkout live in Stripe; orders = Stripe Dashboard + Resend emails (no Supabase orders table). Fulfilment = in-studio pickup. Gated OFF until Stripe keys + `npm run stripe:sync`. Prices in `data/products.json` are scraped Éminence values — reconcile with the client price-list before the LIVE sync.
 - Accounts: NO customer accounts (guest booking + guest checkout). Only login = staff admin (Supabase Auth, admin role) → Supabase needed at launch for bookings store + admin auth.
 - Admin shows: all upcoming/past appointments with customer name, email, phone, service(s), booked time slot, notes; manage status (confirm/reschedule/cancel/complete/no-show). Customer PII → admin-only, protect with RLS.
 - Hours = Mon–Fri 10am–7pm, Sat 10am–6pm, Sun 11am–6pm. Parking = back lane behind building, accessible.
@@ -154,9 +165,10 @@ should always keep in mind.
 ### Up Next
 1. Import the repo into Vercel (dashboard → New Project → harav-website). Production branch = main; framework auto-detects Next.js. Vercel builds on Linux, so the exFAT issue does not affect it.
 2. Provision env (client working on these): Supabase (run `supabase/migrations/0001_init.sql` + create Khushi's admin user), Stripe (keys + webhook secret), Resend (verify domain). Add to Vercel env + local `.env.local` from `.env.example`.
-3. Run **06-seo-geo-agent** → **07-reviewer** → **08-qa**.
+3. **Go live with the boutique:** confirm catalog prices vs the client price-list → `npm run stripe:sync` (test first, then LIVE keys) → set `NEXT_PUBLIC_STORE_ENABLED=true` → add the `checkout.session.completed` webhook (already handles both deposits and orders) → smoke-test add-to-bag → Stripe Checkout → `/shop/success` + order emails.
+4. Run **06-seo-geo-agent** → **07-reviewer** → **08-qa**.
 
-> Local builds: D: is exFAT → `next build` fails (readlink). Build on an NTFS path, or just let Vercel build.
+> Local builds: D: is exFAT → bare `next build` crashes (readlink EISDIR). RESOLVED — `npm run build` now uses `scripts/build.cjs`, which preloads a readlink shim and builds green on D:. Vercel/Linux unaffected either way.
 
 ### Blockers (waiting on client — see discovery.md §8)
 - ✅ RESOLVED — Booking: in-house custom build (no third-party)
@@ -168,7 +180,7 @@ should always keep in mind.
 - ✅ RESOLVED — Photography: curated LUXURY STOCK (warm/gilded/low-lit) until a real shoot; hero < 1.5s
 - ✅ RESOLVED — Deposit: $20 Stripe deposit on a defined subset → Stripe needed at launch (see discovery §5)
 - Remaining (non-blocking): new-guest offer specifics; confirm if deposit carries to a reschedule; set up Google Business Profile + gather real reviews post-launch
-- ⚠ INFRA: D: is exFAT → `next build` fails (readlink EISDIR, both webpack & turbopack). Build/deploy from an NTFS path (e.g. C:). Code verified green on NTFS.
+- ✅ RESOLVED — INFRA: D: exFAT made bare `next build` crash (readlink EISDIR; the exFAT FS returns EISDIR where @vercel/nft expects EINVAL). Fixed with a readlink shim — `npm run build` → `node scripts/build.cjs` (preloads `scripts/patch-node24-readlink.cjs`). Builds green on D:; no-op on Vercel/Linux. (Updating Node *forward* does NOT fix it; the trigger is the filesystem.)
 - ⚠ ENV: provision Supabase (run `supabase/migrations/0001_init.sql` + create admin user), Stripe (keys + webhook secret), Resend (verify haravsalonspa.ca + from address); copy `.env.example` → `.env.local`.
 - ✅ RESOLVED — No CUSTOMER accounts (guest booking/checkout); BUILD a staff admin/back-office (`/admin`) to manage bookings (+ orders in P2) via Supabase Auth
 

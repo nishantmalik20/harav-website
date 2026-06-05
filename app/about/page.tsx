@@ -30,7 +30,7 @@ export default function AboutPage() {
             an hour that&rsquo;s entirely yours.
           </p>
           <Link
-            href="/treatments"
+            href="/services"
             className={cn(buttonVariants({ variant: "primary" }), "mt-9")}
           >
             See the menu
@@ -158,7 +158,7 @@ export default function AboutPage() {
           </>
         }
         body="Your first hour is the easiest to book. We'll take care of the rest."
-        ctaLabel="Reserve an hour"
+        ctaLabel="Book services"
         ctaHref="/book"
       />
     </>

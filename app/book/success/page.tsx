@@ -18,7 +18,7 @@ export default async function BookingSuccessPage({
   return (
     <section className="px-6 py-32 lg:py-40">
       <div className="mx-auto flex max-w-xl flex-col items-center text-center">
-        <Eyebrow className="justify-center">Reserved</Eyebrow>
+        <Eyebrow className="justify-center">Booked</Eyebrow>
         <h1 className="mt-5 font-display text-4xl text-espresso md:text-5xl">
           Your hour is held.
         </h1>
@@ -30,7 +30,7 @@ export default async function BookingSuccessPage({
           <Link href="/" className={cn(buttonVariants({ variant: "primary" }))}>
             Back to home
           </Link>
-          <Link href="/treatments" className={cn(buttonVariants({ variant: "ghost" }))}>
+          <Link href="/services" className={cn(buttonVariants({ variant: "ghost" }))}>
             See the menu
           </Link>
         </div>

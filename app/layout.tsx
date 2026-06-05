@@ -3,6 +3,8 @@ import { Marcellus, Jost } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { CartProvider } from "@/components/shop/cart-provider";
+import { CartDrawer } from "@/components/shop/cart-drawer";
 
 const marcellus = Marcellus({
   subsets: ["latin"],
@@ -27,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s | Harav Salon & Spa",
   },
   description:
-    "A women's salon & spa on Pembina Hwy in Winnipeg. Facials, body sugaring, waxing, lashes, nails and massage. Reserve your hour online.",
+    "A women's salon & spa on Pembina Hwy in Winnipeg. Facials, body sugaring, waxing, lashes, nails and massage. Book your appointment online.",
   keywords: [
     "salon and spa Winnipeg",
     "body sugaring Winnipeg",
@@ -54,9 +56,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${marcellus.variable} ${jost.variable}`}>
       <body className="min-h-screen bg-ivory font-body text-espresso antialiased">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <CartProvider>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );

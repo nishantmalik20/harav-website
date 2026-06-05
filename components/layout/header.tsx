@@ -6,11 +6,14 @@ import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { BrandLockup } from "@/components/brand/brand-lockup";
 import { buttonVariants } from "@/components/ui/button";
+import { CartButton } from "@/components/shop/cart-button";
+import { STORE_ENABLED } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
   { href: "/", label: "Home" },
-  { href: "/treatments", label: "Treatments" },
+  { href: "/services", label: "Services" },
+  { href: "/shop", label: "Shop" },
   { href: "/about", label: "About" },
   { href: "/journal", label: "Journal" },
   { href: "/contact", label: "Visit" },
@@ -67,6 +70,7 @@ export function Header() {
         </ul>
 
         <div className="ml-auto flex items-center gap-2">
+          {STORE_ENABLED && <CartButton />}
           <Link
             href="/book"
             className={cn(
@@ -74,7 +78,7 @@ export function Header() {
               "hidden rounded-full py-2.5 pl-5 pr-2 tracking-[0.18em] sm:inline-flex",
             )}
           >
-            Reserve
+            Book
             <span className="grid size-7 place-items-center rounded-full bg-espresso">
               <ArrowUpRight className="size-3.5 text-gold" strokeWidth={2.4} />
             </span>
@@ -120,7 +124,7 @@ export function Header() {
             href="/book"
             className={cn(buttonVariants({ variant: "brass" }), "mt-2 w-full rounded-xl")}
           >
-            Reserve an hour
+            Book
             <ArrowUpRight className="size-4" strokeWidth={2.4} />
           </Link>
         </div>

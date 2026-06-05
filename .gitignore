@@ -29,3 +29,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# eminence scraper working artifacts (regeneratable — keep data/ and public/products/)
+/scripts/eminence/.cache/
+/scripts/eminence/_report.json
+/scripts/eminence/_sitemap-products.txt
+
+# stray reference screenshots dropped in the repo root
+/Screenshot*.jpg
+/Screenshot*.png

@@ -91,8 +91,8 @@ export default function ContactPage() {
             Your hour is <em>waiting.</em>
           </>
         }
-        body="Reserve online, or call and we'll book you in."
-        ctaLabel="Reserve an hour"
+        body="Book online, or call and we'll fit you in."
+        ctaLabel="Book services"
         ctaHref="/book"
       />
     </>

@@ -12,17 +12,24 @@ export function BrandIntro() {
       <Reveal className="mx-auto flex max-w-3xl flex-col items-center text-center">
         <Eyebrow className="justify-center">The Harav Standard</Eyebrow>
         <SectionHeading className="mt-5 max-w-2xl">
-          Considered skin &amp; hair care, <em>for women only.</em>
+          Considered skincare &amp; beauty, <em>for women only.</em>
         </SectionHeading>
         <div className="mt-6 max-w-xl space-y-4 font-body text-base leading-relaxed text-ink-500">
           <p>
-            Step in from the cold. Warm light over everything, and an hour that&rsquo;s
-            yours alone. Facials to brighten and calm, sugaring and waxing done gently,
-            lashes and nails finished with patience.
+            Harav is a women-only salon &amp; spa on Pembina Highway in Fort Garry, built
+            for one thing: an unhurried hour that&rsquo;s entirely yours. Step in from the
+            Winnipeg cold to warm light, careful hands, and treatments chosen for your
+            skin — never a script.
           </p>
           <p>
-            No rush, no noise. Just skilled hands and treatments chosen for your skin,
-            not a script.
+            From brightening facials and gentle body sugaring to waxing, lash &amp; brow
+            work, nails and massage, every treatment is done properly and without rush.
+            We use professional Éminence Organic skincare, matched to what your skin
+            needs on the day.
+          </p>
+          <p>
+            No noise, no upsell theatre — just considered care, and the quiet luxury of
+            being looked after well.
           </p>
         </div>
         <Link href="/book" className={cn(buttonVariants({ variant: "primary" }), "mt-9")}>

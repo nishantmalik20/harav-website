@@ -11,7 +11,7 @@ const FEATURED = [
   {
     title: "Facials",
     img: IMAGES.serviceFacials,
-    href: "/treatments#facials",
+    href: "/services#facials",
     price: "From $49",
     blurb:
       "Brighten, calm, renew. From a quick refresh to advanced hydradermabrasion and carbon-laser facials.",
@@ -21,7 +21,7 @@ const FEATURED = [
   {
     title: "Body sugaring",
     img: IMAGES.serviceSugaring,
-    href: "/treatments#body-sugaring",
+    href: "/services#body-sugaring",
     price: "From $18",
     blurb: "Gentle, natural hair removal, bikini to full legs, done warm and quick.",
     cta: "See sugaring",
@@ -30,7 +30,7 @@ const FEATURED = [
   {
     title: "Lash & brow",
     img: IMAGES.serviceLash,
-    href: "/treatments#lash-brow",
+    href: "/services#lash-brow",
     price: "From $24",
     blurb: "Lifts, tints, and extensions. Eyes opened, softly.",
     cta: "See lash & brow",
@@ -45,10 +45,12 @@ export function ServicesMenu() {
         <Reveal className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <Eyebrow>The Menu</Eyebrow>
-            <SectionHeading className="mt-5">Our treatments.</SectionHeading>
+            <SectionHeading className="mt-5">Our services.</SectionHeading>
           </div>
           <p className="max-w-sm font-body text-base leading-relaxed text-ink-500">
-            Six ways to spend an hour, chosen for results, given with care.
+            Six services, one standard of care — facials, body sugaring, waxing, lash
+            &amp; brow, nails and massage, each done properly in a calm, women-only room
+            in Fort Garry.
           </p>
         </Reveal>
 
@@ -107,7 +109,7 @@ export function ServicesMenu() {
 
         <div className="mt-10 text-center">
           <Link
-            href="/treatments"
+            href="/services"
             className="inline-flex items-center gap-2 font-body text-sm uppercase tracking-[0.16em] text-gold-deep transition-colors hover:text-espresso"
           >
             See the full menu: waxing, nails &amp; massage too

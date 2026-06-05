@@ -8,28 +8,28 @@ import { SERVICE_CATEGORIES, formatPrice, type Service } from "@/lib/services";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Treatments & Pricing",
+  title: "Services & Pricing",
   description:
-    "Facials, body sugaring, waxing, lash & brow, nails and massage in Winnipeg. See Harav's full menu and reserve your appointment online.",
+    "Facials, body sugaring, waxing, lash & brow, nails and massage in Winnipeg. See Harav's full menu and book your appointment online.",
 };
 
-export default function TreatmentsPage() {
+export default function ServicesPage() {
   return (
     <>
       <section className="px-6 pt-20 pb-10 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <Eyebrow>The Full Menu</Eyebrow>
-          <h1 className="mt-5 font-display text-5xl text-espresso md:text-6xl">Treatments.</h1>
+          <h1 className="mt-5 font-display text-5xl text-espresso md:text-6xl">Services.</h1>
           <p className="mt-5 max-w-xl font-body text-base leading-relaxed text-ink-500">
             Everything we do, in one place, with honest pricing and an easy way to book.
           </p>
           <Link href="/book" className={cn(buttonVariants({ variant: "primary" }), "mt-8")}>
-            Reserve an hour
+            Book services
             <ArrowUpRight className="size-4" strokeWidth={2.4} />
           </Link>
 
           {/* Category jump links */}
-          <nav aria-label="Treatment categories" className="mt-10 flex flex-wrap gap-x-5 gap-y-2 border-t border-espresso/10 pt-6">
+          <nav aria-label="Service categories" className="mt-10 flex flex-wrap gap-x-5 gap-y-2 border-t border-espresso/10 pt-6">
             {SERVICE_CATEGORIES.map((category) => (
               <a
                 key={category.slug}
@@ -102,8 +102,8 @@ export default function TreatmentsPage() {
             Found <em>your hour?</em>
           </>
         }
-        body="Reserve online in under a minute. We'll hold the time and send a confirmation."
-        ctaLabel="Reserve an hour"
+        body="Book online in under a minute. We'll hold the time and send a confirmation."
+        ctaLabel="Book services"
         ctaHref="/book"
       />
     </>

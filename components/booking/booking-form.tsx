@@ -194,7 +194,7 @@ export function BookingForm() {
       )}
 
       <Button type="submit" disabled={status === "loading"} className="w-full sm:w-auto">
-        {status === "loading" ? "Holding your hour…" : "Reserve my hour"}
+        {status === "loading" ? "Booking your appointment…" : "Book my appointment"}
         <ArrowUpRight className="size-4" strokeWidth={2.4} />
       </Button>
     </form>

@@ -62,7 +62,7 @@ export default function JournalPage() {
 
         <div className="mx-auto mt-12 max-w-6xl text-center">
           <Link href="/book" className={cn(buttonVariants({ variant: "ghost" }))}>
-            Reserve an hour
+            Book services
             <ArrowUpRight className="size-4" strokeWidth={2.4} />
           </Link>
         </div>

@@ -18,7 +18,17 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
-  return { title: post.title, description: post.excerpt };
+  return {
+    title: post.title,
+    description: post.excerpt,
+    keywords: post.keywords,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      images: [post.image],
+    },
+  };
 }
 
 export default async function JournalPostPage({
@@ -30,8 +40,24 @@ export default async function JournalPostPage({
   const post = getPost(slug);
   if (!post) notFound();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: { "@type": "Person", name: post.author.name },
+    publisher: { "@type": "Organization", name: "Harav Salon & Spa" },
+    image: post.image,
+    keywords: post.keywords.join(", "),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <article className="px-6 pt-20 pb-16 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <Link
@@ -60,10 +86,35 @@ export default async function JournalPostPage({
             priority
           />
 
-          <div className="mt-10 space-y-5 font-body text-[17px] leading-relaxed text-ink-600">
-            {post.body.map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
-            ))}
+          <div className="mt-10 font-body text-[17px] leading-relaxed text-ink-600">
+            {post.body.map((block, i) => {
+              if (block.type === "h2") {
+                return (
+                  <h2
+                    key={i}
+                    className="mt-10 font-display text-2xl leading-snug text-espresso md:text-[28px]"
+                  >
+                    {block.text}
+                  </h2>
+                );
+              }
+              if (block.type === "ul") {
+                return (
+                  <ul key={i} className="mt-5 space-y-2.5 pl-5">
+                    {block.items.map((item, j) => (
+                      <li key={j} className="list-disc marker:text-gold-deep">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                );
+              }
+              return (
+                <p key={i} className="mt-5">
+                  {block.text}
+                </p>
+              );
+            })}
           </div>
         </div>
       </article>
@@ -75,8 +126,8 @@ export default async function JournalPostPage({
             Ready <em>when you are.</em>
           </>
         }
-        body="Reserve online in under a minute. Your hour begins the moment you arrive."
-        ctaLabel="Reserve an hour"
+        body="Book online in under a minute. Your hour begins the moment you arrive."
+        ctaLabel="Book services"
         ctaHref="/book"
       />
     </>

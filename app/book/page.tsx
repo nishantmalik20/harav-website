@@ -5,7 +5,7 @@ import { BookingForm } from "@/components/booking/booking-form";
 export const metadata: Metadata = {
   title: "Book an Appointment",
   description:
-    "Reserve facials, sugaring, waxing, lashes, nails or massage at Harav in Winnipeg. Quick online booking. A $20 deposit holds select treatments.",
+    "Book facials, sugaring, waxing, lashes, nails or massage at Harav in Winnipeg. Quick online booking. A $20 deposit holds select treatments.",
 };
 
 const STEPS = [
@@ -19,7 +19,7 @@ export default function BookPage() {
   return (
     <section className="px-6 pt-20 pb-24 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <Eyebrow>Reserve Your Hour</Eyebrow>
+        <Eyebrow>Book Your Appointment</Eyebrow>
         <h1 className="mt-5 font-display text-5xl text-espresso md:text-6xl">
           Book your appointment.
         </h1>

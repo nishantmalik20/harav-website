@@ -28,16 +28,16 @@ export function Footer() {
             <NewsletterForm />
           </div>
 
-          {/* Treatments */}
-          <nav aria-label="Treatments">
+          {/* Services */}
+          <nav aria-label="Services">
             <h2 className="mb-6 font-body text-sm font-medium uppercase tracking-[0.18em] text-gold-light">
-              Treatments
+              Services
             </h2>
             <ul className="space-y-3.5">
               {SERVICE_CATEGORIES.map((category) => (
                 <li key={category.slug}>
                   <Link
-                    href={`/treatments#${category.slug}`}
+                    href={`/services#${category.slug}`}
                     className="font-body text-sm text-ink-300 transition-colors hover:text-gold-light"
                   >
                     {category.name}
@@ -56,7 +56,7 @@ export function Footer() {
               {[
                 { href: "/about", label: "About" },
                 { href: "/journal", label: "Journal" },
-                { href: "/book", label: "Reserve" },
+                { href: "/book", label: "Book" },
                 { href: "/contact", label: "Visit" },
               ].map((link) => (
                 <li key={link.href}>

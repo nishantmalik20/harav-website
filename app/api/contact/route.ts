@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
-import { sendContactEmail } from "@/lib/email";
+import { sendContactEmail, sendContactAutoReply } from "@/lib/email";
 
 const schema = z.object({
   name: z.string().min(1).max(120),
@@ -15,7 +15,8 @@ export async function POST(req: NextRequest) {
     if (!parsed.success) {
       return NextResponse.json({ ok: false, error: "Invalid input." }, { status: 400 });
     }
-    await sendContactEmail(parsed.data);
+    await sendContactEmail(parsed.data); // to the salon — throws on failure
+    await sendContactAutoReply(parsed.data); // "thanks for contacting" to the guest — best-effort
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error("contact route error", e);

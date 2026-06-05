@@ -96,7 +96,7 @@ export async function POST(req: NextRequest) {
           },
         ],
         client_reference_id: bookingId,
-        metadata: { booking_id: bookingId },
+        metadata: { kind: "deposit", booking_id: bookingId },
         success_url: `${siteUrl}/book/success?booking=${bookingId}`,
         cancel_url: `${siteUrl}/book?canceled=1`,
       });

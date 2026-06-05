@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "node scripts/build.cjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "stripe:sync": "node --env-file=.env.local scripts/stripe/sync-products.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
