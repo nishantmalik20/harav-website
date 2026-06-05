@@ -5,17 +5,29 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { buttonVariants } from "@/components/ui/button";
 import { CtaBanner } from "@/components/sections/cta-banner";
 import { SERVICE_CATEGORIES, formatPrice, type Service } from "@/lib/services";
+import { JsonLd } from "@/components/seo/json-ld";
+import { serviceCatalogSchema, breadcrumbSchema } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Services & Pricing",
   description:
     "Facials, body sugaring, waxing, lash & brow, nails and massage in Winnipeg. See Harav's full menu and book your appointment online.",
+  alternates: { canonical: "/services" },
 };
 
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          { "@context": "https://schema.org", ...serviceCatalogSchema() },
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+          ]),
+        ]}
+      />
       <section className="px-6 pt-20 pb-10 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <Eyebrow>The Full Menu</Eyebrow>

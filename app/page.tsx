@@ -7,10 +7,16 @@ import { Bestsellers } from "@/components/sections/bestsellers";
 import { JournalPreview } from "@/components/sections/journal-preview";
 import { Faq } from "@/components/sections/faq";
 import { CtaBanner } from "@/components/sections/cta-banner";
+import { JsonLd } from "@/components/seo/json-ld";
+import { localBusinessSchema } from "@/lib/seo";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={localBusinessSchema()} />
       <Hero />
       <BrandIntro />
       <ProofBento />

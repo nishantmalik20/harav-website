@@ -10,6 +10,8 @@ import { AddToBag } from "@/components/shop/add-to-bag";
 import { ProductCard } from "@/components/shop/product-card";
 import { StarRating } from "@/components/shop/star-rating";
 import { getRating } from "@/lib/ratings";
+import { JsonLd } from "@/components/seo/json-ld";
+import { productSchema, breadcrumbSchema } from "@/lib/seo";
 import {
   PRODUCTS,
   getProductBySlug,
@@ -37,6 +39,7 @@ export async function generateMetadata({
       product.description ||
       `${product.name} by ${product.brand}, available at Harav Salon & Spa in Winnipeg.`,
     openGraph: product.image ? { images: [{ url: product.image }] } : undefined,
+    alternates: { canonical: `/shop/${slug}` },
   };
 }
 
@@ -56,6 +59,25 @@ export default async function ProductPage({
 
   return (
     <>
+      <JsonLd
+        data={[
+          productSchema({
+            name: product.name,
+            slug: product.slug,
+            description: product.description,
+            price: product.price,
+            currency: product.currency,
+            image: product.image,
+            brand: product.brand,
+            rating,
+          }),
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Shop", path: "/shop" },
+            { name: product.name, path: `/shop/${product.slug}` },
+          ]),
+        ]}
+      />
       <div className="px-6 pb-20 pt-20 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <nav className="flex items-center gap-2 font-body text-xs uppercase tracking-[0.16em] text-ink-400">

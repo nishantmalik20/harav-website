@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Book an Appointment",
   description:
     "Book facials, sugaring, waxing, lashes, nails or massage at Harav in Winnipeg. Quick online booking. A $20 deposit holds select treatments.",
+  alternates: { canonical: "/book" },
 };
 
 const STEPS = [

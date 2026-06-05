@@ -5,6 +5,8 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { CartProvider } from "@/components/shop/cart-provider";
 import { CartDrawer } from "@/components/shop/cart-drawer";
+import { JsonLd } from "@/components/seo/json-ld";
+import { organizationSchema } from "@/lib/seo";
 
 const marcellus = Marcellus({
   subsets: ["latin"],
@@ -47,6 +49,12 @@ export const metadata: Metadata = {
     locale: "en_CA",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Harav Salon & Spa in Winnipeg",
+    description:
+      "A women's salon & spa in Winnipeg. Facials, sugaring, lashes, nails and massage.",
+  },
   robots: { index: true, follow: true },
 };
 
@@ -56,6 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${marcellus.variable} ${jost.variable}`}>
       <body className="min-h-screen bg-ivory font-body text-espresso antialiased">
+        <JsonLd data={organizationSchema()} />
         <CartProvider>
           <Header />
           <main>{children}</main>

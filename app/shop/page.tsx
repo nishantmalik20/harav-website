@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Shop Éminence Organic Skin Care",
   description:
     "Shop Éminence Organic Skin Care at Harav Salon & Spa in Winnipeg — cleansers, serums, masques, moisturizers, body and sun care, hand-picked by our esthetician.",
+  alternates: { canonical: "/shop" },
 };
 
 export default function ShopPage() {

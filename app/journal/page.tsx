@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "The Journal",
   description:
     "Plain-language notes on facials, sugaring, lashes and self-care from Harav Salon & Spa in Winnipeg. What to expect, how to prepare, how to glow.",
+  alternates: { canonical: "/journal" },
 };
 
 export default function JournalPage() {

@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Harav is a women's salon & spa on Pembina Hwy in Winnipeg: warm, careful, results-led care. Meet the room, the standard, and Khushi.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

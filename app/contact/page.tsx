@@ -11,6 +11,7 @@ export const metadata: Metadata = {
   title: "Visit",
   description:
     "Find Harav Salon & Spa at Unit #2 – 1172 Pembina Hwy, Winnipeg. Hours, directions, phone and an easy way to reach us or book your hour.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
