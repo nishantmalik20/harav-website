@@ -1,3 +1,5 @@
+import type { IntakeFormId } from "@/lib/intake";
+
 export type BookingStatus =
   | "new"
   | "confirmed"
@@ -20,6 +22,9 @@ export interface BookingRow {
   preferred_time: string;
   esthetician: string | null;
   notes: string | null;
+  intake_form: IntakeFormId;
+  intake: Record<string, string | string[]> | null;
+  consented_at: string | null;
   deposit_required: boolean;
   deposit_amount: number;
   deposit_status: DepositStatus;

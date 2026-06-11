@@ -15,6 +15,12 @@ create table if not exists public.bookings (
   preferred_time    text not null,
   esthetician       text default 'Khushi',
   notes             text,
+  -- Pre-treatment consultation: which questionnaire the service carried
+  -- (facial | carbon-laser | lash-extensions | sugaring | general) and the
+  -- guest's answers (null for the general disclosure, which has no questions).
+  intake_form       text not null default 'general',
+  intake            jsonb,
+  consented_at      timestamptz,
   deposit_required  boolean not null default false,
   deposit_amount    numeric(10,2) not null default 0,
   deposit_status    text not null default 'none',  -- none | pending | paid

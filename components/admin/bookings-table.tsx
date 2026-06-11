@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { Fragment, useState, useTransition } from "react";
 import {
   confirmBooking,
   completeBooking,
   cancelBooking,
   noShowBooking,
 } from "@/app/admin/actions";
+import { INTAKE_FORMS, intakeSummary } from "@/lib/intake";
 import type { BookingRow, BookingStatus } from "@/types/database";
 import { cn } from "@/lib/utils";
 
@@ -30,6 +31,7 @@ const STATUS_LABEL: Record<BookingStatus, string> = {
 
 export function BookingsTable({ bookings }: { bookings: BookingRow[] }) {
   const [tab, setTab] = useState<Tab>("upcoming");
+  const [openIntakeId, setOpenIntakeId] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const today = new Date().toISOString().split("T")[0];
 
@@ -83,7 +85,8 @@ export function BookingsTable({ bookings }: { bookings: BookingRow[] }) {
             </thead>
             <tbody className="font-body text-sm text-ink-600">
               {filtered.map((b) => (
-                <tr key={b.id} className="border-t border-espresso/[0.08] align-top">
+                <Fragment key={b.id}>
+                <tr className="border-t border-espresso/[0.08] align-top">
                   <td className="px-4 py-4 whitespace-nowrap">
                     <div className="text-espresso">{b.preferred_date}</div>
                     <div className="text-ink-400">{b.preferred_time}</div>
@@ -97,6 +100,15 @@ export function BookingsTable({ bookings }: { bookings: BookingRow[] }) {
                   <td className="px-4 py-4">
                     <div className="text-espresso">{b.service_name}</div>
                     <div className="text-ink-400">{b.service_category}</div>
+                    {b.intake && b.intake_form !== "general" && (
+                      <button
+                        type="button"
+                        onClick={() => setOpenIntakeId(openIntakeId === b.id ? null : b.id)}
+                        className="mt-1.5 font-body text-[11px] uppercase tracking-[0.1em] text-gold-deep underline-offset-2 hover:underline"
+                      >
+                        {openIntakeId === b.id ? "Hide consultation" : "View consultation"}
+                      </button>
+                    )}
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap">
                     {b.deposit_required ? (
@@ -133,6 +145,29 @@ export function BookingsTable({ bookings }: { bookings: BookingRow[] }) {
                     </div>
                   </td>
                 </tr>
+                {openIntakeId === b.id && b.intake && (
+                  <tr className="border-t border-espresso/[0.05] bg-cream/30">
+                    <td colSpan={6} className="px-4 py-5">
+                      <p className="font-body text-[11px] uppercase tracking-[0.14em] text-gold-deep">
+                        {INTAKE_FORMS[b.intake_form]?.title ?? "Consultation"}
+                      </p>
+                      <dl className="mt-3 grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+                        {intakeSummary(b.intake_form, b.intake).map((q) => (
+                          <div key={q.label}>
+                            <dt className="font-body text-xs text-ink-400">{q.label}</dt>
+                            <dd className="mt-0.5 font-body text-sm text-espresso">{q.value}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                      {b.consented_at && (
+                        <p className="mt-4 font-body text-xs text-ink-400">
+                          Consent confirmed online · {new Date(b.consented_at).toLocaleString()}
+                        </p>
+                      )}
+                    </td>
+                  </tr>
+                )}
+                </Fragment>
               ))}
             </tbody>
           </table>

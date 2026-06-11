@@ -4,6 +4,16 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getStripe } from "@/lib/stripe";
 import { findService, effectivePrice, DEPOSIT_AMOUNT } from "@/lib/services";
 import { sendBookingNotification, sendBookingConfirmation, type BookingEmail } from "@/lib/email";
+import {
+  INTAKE_FORMS,
+  intakeFormIdForService,
+  requiresQuestionnaire,
+  validateIntake,
+  sanitizeIntake,
+  isUnder18,
+  intakeSummary,
+  UNDER_18_MESSAGE,
+} from "@/lib/intake";
 
 const schema = z.object({
   name: z.string().min(1).max(120),
@@ -15,6 +25,11 @@ const schema = z.object({
   time: z.string().min(1).max(20),
   esthetician: z.string().max(120).optional(),
   notes: z.string().max(2000).optional(),
+  intake: z.object({
+    formId: z.enum(["facial", "carbon-laser", "lash-extensions", "sugaring", "general"]),
+    answers: z.record(z.union([z.string().max(2000), z.array(z.string().max(200)).max(40)])),
+  }),
+  consent: z.literal(true),
 });
 
 export async function POST(req: NextRequest) {
@@ -30,9 +45,27 @@ export async function POST(req: NextRequest) {
     if (!found) {
       return NextResponse.json({ ok: false, error: "Unknown service." }, { status: 400 });
     }
-    const { service } = found;
+    const { category, service } = found;
     const depositRequired = service.deposit;
     const price = effectivePrice(service);
+
+    // The consultation is re-validated server-side against the same definitions
+    // the form renders from — required questions can't be skipped client-side.
+    const expectedFormId = intakeFormIdForService(category.slug, service.name);
+    if (d.intake.formId !== expectedFormId) {
+      return NextResponse.json({ ok: false, error: "Invalid consultation form." }, { status: 400 });
+    }
+    const intakeForm = INTAKE_FORMS[expectedFormId];
+    const intakeAnswers = sanitizeIntake(intakeForm, d.intake.answers);
+    if (Object.keys(validateIntake(intakeForm, intakeAnswers)).length > 0) {
+      return NextResponse.json(
+        { ok: false, error: "Please complete every consultation question." },
+        { status: 400 },
+      );
+    }
+    if (isUnder18(intakeForm, intakeAnswers)) {
+      return NextResponse.json({ ok: false, error: UNDER_18_MESSAGE }, { status: 400 });
+    }
 
     const supabase = createAdminClient();
     const { data: booking, error } = await supabase
@@ -48,6 +81,9 @@ export async function POST(req: NextRequest) {
         preferred_time: d.time,
         esthetician: d.esthetician || "Khushi",
         notes: d.notes || null,
+        intake_form: expectedFormId,
+        intake: requiresQuestionnaire(expectedFormId) ? intakeAnswers : null,
+        consented_at: new Date().toISOString(),
         deposit_required: depositRequired,
         deposit_amount: depositRequired ? DEPOSIT_AMOUNT : 0,
         deposit_status: depositRequired ? "pending" : "none",
@@ -73,6 +109,10 @@ export async function POST(req: NextRequest) {
       notes: d.notes,
       depositRequired,
       depositAmount: depositRequired ? DEPOSIT_AMOUNT : 0,
+      intakeTitle: requiresQuestionnaire(expectedFormId) ? intakeForm.title : undefined,
+      intake: requiresQuestionnaire(expectedFormId)
+        ? intakeSummary(expectedFormId, intakeAnswers)
+        : undefined,
     };
 
     // Always alert the salon.

@@ -86,6 +86,9 @@ export interface BookingEmail {
   notes?: string | null;
   depositRequired: boolean;
   depositAmount: number;
+  /** Consultation questionnaire title + answers, when the service carries one. */
+  intakeTitle?: string;
+  intake?: { label: string; value: string }[];
 }
 
 /** Notify the salon of a new booking (best-effort — never blocks the booking). */
@@ -99,7 +102,21 @@ export async function sendBookingNotification(b: BookingEmail) {
         ${detailRow("When", `${esc(b.date)} at ${esc(b.time)}`)}
         ${detailRow("Deposit", b.depositRequired ? `$${b.depositAmount} (pending payment)` : "None")}
         ${b.notes ? detailRow("Notes", esc(b.notes)) : ""}
-      </table>`;
+      </table>
+      ${
+        b.intake && b.intake.length
+          ? `<div style="margin-top:24px;border-top:1px solid #ece3d2;padding-top:18px;">
+        <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#9a6e2e;margin:0 0 12px;">${esc(b.intakeTitle ?? "Consultation")}</p>
+        ${b.intake
+          .map(
+            (q) =>
+              `<p style="font-size:13px;line-height:1.5;color:#6b5b49;margin:0 0 2px;">${esc(q.label)}</p>` +
+              `<p style="font-size:14px;line-height:1.5;color:#241712;margin:0 0 12px;">${esc(q.value)}</p>`,
+          )
+          .join("")}
+      </div>`
+          : ""
+      }`;
     await getResend().emails.send({
       from: FROM,
       to: NOTIFY,

@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 const STEPS = [
   "Choose your treatment.",
   "Pick a date and time that suits you.",
-  "Add your details, and a $20 deposit for select treatments, applied to your total.",
-  "Get an instant confirmation by email.",
+  "Add your details.",
+  "Answer a short consultation for select treatments — facials, lash extensions and body sugaring — add the $20 deposit where it applies, and get your confirmation by email.",
 ];
 
 export default function BookPage() {
