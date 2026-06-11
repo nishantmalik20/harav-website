@@ -38,3 +38,6 @@ next-env.d.ts
 # stray reference screenshots dropped in the repo root
 /Screenshot*.jpg
 /Screenshot*.png
+
+# client-sent consultation form references (contain third-party details — keep local only)
+/Form References/
