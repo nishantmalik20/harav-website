@@ -86,9 +86,45 @@ export interface BookingEmail {
   notes?: string | null;
   depositRequired: boolean;
   depositAmount: number;
+  /** True once the Stripe deposit has been paid (set by the webhook). */
+  depositPaid?: boolean;
+  /** Stripe payment reference for the deposit receipt (PaymentIntent id). */
+  paymentRef?: string;
   /** Consultation questionnaire title + answers, when the service carries one. */
   intakeTitle?: string;
   intake?: { label: string; value: string }[];
+}
+
+/** Consultation Q&A block shared by the salon notification and the guest
+ *  confirmation, so both sides see the same answers. */
+function intakeSection(b: BookingEmail): string {
+  if (!b.intake || !b.intake.length) return "";
+  return `<div style="margin-top:24px;border-top:1px solid #ece3d2;padding-top:18px;">
+    <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#9a6e2e;margin:0 0 12px;">${esc(b.intakeTitle ?? "Consultation")}</p>
+    ${b.intake
+      .map(
+        (q) =>
+          `<p style="font-size:13px;line-height:1.5;color:#6b5b49;margin:0 0 2px;">${esc(q.label)}</p>` +
+          `<p style="font-size:14px;line-height:1.5;color:#241712;margin:0 0 12px;">${esc(q.value)}</p>`,
+      )
+      .join("")}
+  </div>`;
+}
+
+/** Boxed receipt for a paid booking deposit. */
+function depositReceipt(b: BookingEmail): string {
+  if (!b.depositPaid) return "";
+  const paidOn = new Date().toLocaleDateString("en-CA", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 22px;width:100%;"><tr><td style="background:#f6efe0;border:1px solid #e6d8bd;border-radius:8px;padding:14px 18px;">
+    <span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#9a6e2e;">Deposit receipt</span><br/>
+    <span style="font-family:Georgia,serif;font-size:21px;color:#241712;">$${b.depositAmount.toFixed(2)} CAD &mdash; paid</span><br/>
+    <span style="font-size:12px;line-height:1.7;color:#6b5b49;">${paidOn}${b.paymentRef ? ` &middot; Ref: ${esc(b.paymentRef)}` : ""}</span><br/>
+    <span style="font-size:13px;line-height:1.6;color:#6b5b49;">Applied in full to your treatment total on the day. Non-refundable.</span>
+  </td></tr></table>`;
 }
 
 /** Notify the salon of a new booking (best-effort — never blocks the booking). */
@@ -100,23 +136,10 @@ export async function sendBookingNotification(b: BookingEmail) {
         ${detailRow("Name", esc(b.name))}${detailRow("Email", esc(b.email))}${detailRow("Phone", esc(b.phone))}
         ${detailRow("Service", `${esc(b.serviceName)} (${esc(b.serviceCategory)})`)}
         ${detailRow("When", `${esc(b.date)} at ${esc(b.time)}`)}
-        ${detailRow("Deposit", b.depositRequired ? `$${b.depositAmount} (pending payment)` : "None")}
+        ${detailRow("Deposit", b.depositPaid ? `$${b.depositAmount} PAID${b.paymentRef ? ` (${esc(b.paymentRef)})` : ""}` : b.depositRequired ? `$${b.depositAmount} (pending payment)` : "None")}
         ${b.notes ? detailRow("Notes", esc(b.notes)) : ""}
       </table>
-      ${
-        b.intake && b.intake.length
-          ? `<div style="margin-top:24px;border-top:1px solid #ece3d2;padding-top:18px;">
-        <p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#9a6e2e;margin:0 0 12px;">${esc(b.intakeTitle ?? "Consultation")}</p>
-        ${b.intake
-          .map(
-            (q) =>
-              `<p style="font-size:13px;line-height:1.5;color:#6b5b49;margin:0 0 2px;">${esc(q.label)}</p>` +
-              `<p style="font-size:14px;line-height:1.5;color:#241712;margin:0 0 12px;">${esc(q.value)}</p>`,
-          )
-          .join("")}
-      </div>`
-          : ""
-      }`;
+      ${intakeSection(b)}`;
     await getResend().emails.send({
       from: FROM,
       to: NOTIFY,
@@ -129,22 +152,36 @@ export async function sendBookingNotification(b: BookingEmail) {
   }
 }
 
-/** Confirm the booking to the guest (best-effort). */
+/** Confirm the booking to the guest (best-effort). For deposit bookings this
+ *  is sent by the Stripe webhook after payment and doubles as the receipt. */
 export async function sendBookingConfirmation(b: BookingEmail) {
   try {
+    const intro = b.depositPaid
+      ? `Thank you, ${esc(b.name)}. Your deposit has been received and your appointment is booked — your receipt and details are below.`
+      : `Thank you, ${esc(b.name)}. We&rsquo;ve received your booking and will confirm shortly.`;
     const content = `
-      <p style="font-size:15px;line-height:1.7;color:#4a3f35;margin:0 0 8px;">Thank you, ${esc(b.name)}. We&rsquo;ve received your booking and will confirm shortly.</p>
+      ${depositReceipt(b)}
+      <p style="font-size:15px;line-height:1.7;color:#4a3f35;margin:0 0 8px;">${intro}</p>
       <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:18px 0;">
-        ${detailRow("Treatment", esc(b.serviceName))}
+        ${detailRow("Treatment", `${esc(b.serviceName)} (${esc(b.serviceCategory)})`)}
         ${detailRow("When", `${esc(b.date)} at ${esc(b.time)}`)}
-        ${b.depositRequired ? detailRow("Deposit", `$${b.depositAmount} received, applied to your total. Non-refundable.`) : ""}
+        ${detailRow("Where", `${SITE.address.line1}, ${SITE.address.city}, ${SITE.address.region} ${SITE.address.postalCode}`)}
+        ${b.depositPaid ? detailRow("Deposit", `$${b.depositAmount} paid — comes off your total on the day.`) : ""}
+        ${b.notes ? detailRow("Your notes", esc(b.notes)) : ""}
       </table>
-      <p style="font-size:15px;line-height:1.7;color:#4a3f35;margin:0;">We look forward to giving you a calm, unhurried hour.</p>`;
+      ${intakeSection(b)}
+      <p style="font-size:15px;line-height:1.7;color:#4a3f35;margin:${b.intake?.length ? "18px" : "0"} 0 0;">Need to change your plans? Please give us at least 24 hours&rsquo; notice. We look forward to giving you a calm, unhurried hour.</p>`;
     await getResend().emails.send({
       from: FROM,
       to: b.email,
-      subject: `Your appointment is held: ${b.serviceName}`,
-      html: emailShell({ title: "Your hour is held.", preheader: `${b.serviceName} — ${b.date} ${b.time}`, contentHtml: content }),
+      subject: b.depositPaid
+        ? `Appointment confirmed — deposit receipt (${b.serviceName})`
+        : `Your appointment is held: ${b.serviceName}`,
+      html: emailShell({
+        title: b.depositPaid ? "Your appointment is confirmed." : "Your hour is held.",
+        preheader: `${b.serviceName} — ${b.date} ${b.time}`,
+        contentHtml: content,
+      }),
     });
   } catch (e) {
     console.error("sendBookingConfirmation failed", e);

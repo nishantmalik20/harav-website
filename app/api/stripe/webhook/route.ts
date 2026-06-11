@@ -8,6 +8,7 @@ import {
   sendOrderNotification,
   type OrderEmail,
 } from "@/lib/email";
+import { INTAKE_FORMS, intakeSummary, requiresQuestionnaire } from "@/lib/intake";
 import type { BookingRow } from "@/types/database";
 
 export async function POST(req: NextRequest) {
@@ -50,6 +51,8 @@ export async function POST(req: NextRequest) {
           const data = updated as BookingRow | null;
 
           if (data) {
+            const formId = data.intake_form;
+            const hasIntake = requiresQuestionnaire(formId) && !!data.intake;
             await sendBookingConfirmation({
               name: data.customer_name,
               email: data.customer_email,
@@ -61,6 +64,13 @@ export async function POST(req: NextRequest) {
               notes: data.notes,
               depositRequired: true,
               depositAmount: data.deposit_amount,
+              depositPaid: true,
+              paymentRef:
+                typeof session.payment_intent === "string"
+                  ? session.payment_intent
+                  : session.payment_intent?.id,
+              intakeTitle: hasIntake ? INTAKE_FORMS[formId].title : undefined,
+              intake: hasIntake ? intakeSummary(formId, data.intake!) : undefined,
             });
           }
         } catch (e) {
