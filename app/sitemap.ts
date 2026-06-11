@@ -6,7 +6,7 @@ import { JOURNAL_POSTS } from "@/lib/journal";
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const staticPages: MetadataRoute.Sitemap = [
+  const staticPages: MetadataRoute.Sitemap = ([
     { path: "", priority: 1, changeFrequency: "weekly" },
     { path: "/services", priority: 0.9, changeFrequency: "monthly" },
     { path: "/shop", priority: 0.9, changeFrequency: "weekly" },
@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/returns", priority: 0.2, changeFrequency: "yearly" },
     { path: "/privacy", priority: 0.2, changeFrequency: "yearly" },
     { path: "/cookies", priority: 0.2, changeFrequency: "yearly" },
-  ].map((p) => ({
+  ] as const).map((p) => ({
     url: `${SITE_URL}${p.path}`,
     lastModified: now,
     changeFrequency: p.changeFrequency,

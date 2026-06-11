@@ -1,5 +1,6 @@
 import { Hero } from "@/components/sections/hero";
 import { BrandIntro } from "@/components/sections/brand-intro";
+import { CareCategories } from "@/components/sections/care-categories";
 import { ProofBento } from "@/components/sections/proof-bento";
 import { ServicesMenu } from "@/components/sections/services-menu";
 import { ExperienceSteps } from "@/components/sections/experience-steps";
@@ -19,6 +20,7 @@ export default function HomePage() {
       <JsonLd data={localBusinessSchema()} />
       <Hero />
       <BrandIntro />
+      <CareCategories />
       <ProofBento />
       <ServicesMenu />
       <ExperienceSteps />
