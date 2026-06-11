@@ -166,7 +166,7 @@ should always keep in mind.
 
 ### Up Next
 1. Client/user review pass on https://harav-website.vercel.app (incl. real-phone check of the booking wizard at 375px).
-2. Stripe **webhook endpoint** in the dashboard (`checkout.session.completed` → `/api/webhook`) + set `STRIPE_WEBHOOK_SECRET` on Vercel — deposits/orders then flip to "paid" + webhook emails fire. Also merge `main` ← `dev` when review passes (main = production branch on Vercel).
+2. ✅ DONE (2026-06-11) — Stripe TEST webhook endpoint `we_1ThEG41Q1PSNgELb20zcDWxh` → `/api/stripe/webhook`, `STRIPE_WEBHOOK_SECRET` on Vercel. Verified live: signed event → deposit flips to "paid" + guest gets "Appointment confirmed — deposit receipt" email (receipt box w/ amount, date, payment ref + booking details + consultation Q&A; `lib/email.ts`). ⚠ At LIVE-keys switch: recreate the endpoint in live mode + replace the secret. ⚠ Vercel production env vars are write-only here (`vercel env pull` returns ""); keep values in local `.env.local`. Still to do: merge `main` ← `dev` when review passes (main = production branch for git pushes).
 3. **Go live with the boutique:** confirm catalog prices vs the client price-list → `npm run stripe:sync` (test first, then LIVE keys) → smoke-test add-to-bag → Stripe Checkout → `/shop/success` + order emails.
 4. Run **06-seo-geo-agent** (pass 2) → **07-reviewer** → **08-qa**. Before launch: LIVE keys, custom domain haravsalonspa.ca, `NEXT_PUBLIC_SITE_URL` swap, decide fake-ratings removal.
 
