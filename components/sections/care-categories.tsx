@@ -2,8 +2,9 @@ import Link from "next/link";
 import { AutoVideo } from "@/components/motion/auto-video";
 import { Reveal } from "@/components/motion/reveal";
 
-/** Full-bleed editorial category strip — three tall cards with ambient video,
- *  a large vertical word along the left edge, and a quiet pill CTA. */
+/** Editorial category strip — three tall cards with ambient video, a large
+ *  vertical word along the left edge, and a quiet pill CTA. Constrained to the
+ *  site's max-w-6xl container so it lines up with the header and sections. */
 const CATEGORIES = [
   {
     word: "face",
@@ -30,8 +31,8 @@ const CATEGORIES = [
 
 export function CareCategories() {
   return (
-    <section aria-label="Treatment areas" className="px-1.5 pb-24 lg:px-2 lg:pb-28">
-      <div className="grid gap-1.5 md:grid-cols-3 lg:gap-2">
+    <section aria-label="Treatment areas" className="px-6 pb-24 lg:px-8 lg:pb-28">
+      <div className="mx-auto grid max-w-6xl gap-1.5 md:grid-cols-3 lg:gap-2">
         {CATEGORIES.map((c, i) => (
           <Reveal key={c.word} delay={i * 0.08}>
             <Link
