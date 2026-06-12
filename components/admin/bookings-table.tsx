@@ -7,7 +7,7 @@ import {
   cancelBooking,
   noShowBooking,
 } from "@/app/admin/actions";
-import { INTAKE_FORMS, intakeSummary } from "@/lib/intake";
+import { INTAKE_FORMS, intakeSummary, isUnder18 } from "@/lib/intake";
 import type { BookingRow, BookingStatus } from "@/types/database";
 import { cn } from "@/lib/utils";
 
@@ -93,6 +93,11 @@ export function BookingsTable({ bookings }: { bookings: BookingRow[] }) {
                   </td>
                   <td className="px-4 py-4">
                     <div className="text-espresso">{b.customer_name}</div>
+                    {b.intake && isUnder18(INTAKE_FORMS[b.intake_form], b.intake) && (
+                      <span className="my-0.5 inline-block rounded-full bg-warn/15 px-2 py-0.5 text-[11px] font-medium text-warn">
+                        Under 18 — call to confirm
+                      </span>
+                    )}
                     <div className="text-ink-400">{b.customer_phone}</div>
                     <div className="text-ink-400">{b.customer_email}</div>
                     {b.notes && <div className="mt-1 max-w-xs text-xs italic text-ink-400">{b.notes}</div>}

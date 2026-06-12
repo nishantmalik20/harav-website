@@ -86,6 +86,9 @@ export interface BookingEmail {
   notes?: string | null;
   depositRequired: boolean;
   depositAmount: number;
+  /** Guest answered "No" to 18+ — the salon calls for a parent or guardian's
+   *  consent before confirming. */
+  under18?: boolean;
   /** True once the Stripe deposit has been paid (set by the webhook). */
   depositPaid?: boolean;
   /** Stripe payment reference for the deposit receipt (PaymentIntent id). */
@@ -127,10 +130,19 @@ function depositReceipt(b: BookingEmail): string {
   </td></tr></table>`;
 }
 
+/** Amber call-out so an under-18 booking can't be missed in the salon inbox. */
+function under18Banner(b: BookingEmail): string {
+  if (!b.under18) return "";
+  return `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 18px;width:100%;"><tr><td style="background:#fdf3e3;border:1px solid #e8c98a;border-radius:8px;padding:12px 18px;">
+    <span style="font-size:13px;line-height:1.6;color:#8a5a1a;"><strong>Guest is under 18.</strong> Call to confirm — a parent or guardian's consent is required before treatment.</span>
+  </td></tr></table>`;
+}
+
 /** Notify the salon of a new booking (best-effort — never blocks the booking). */
 export async function sendBookingNotification(b: BookingEmail) {
   try {
     const content = `
+      ${under18Banner(b)}
       <p style="font-size:15px;line-height:1.7;color:#4a3f35;margin:0 0 18px;">A new booking request has come in.</p>
       <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;">
         ${detailRow("Name", esc(b.name))}${detailRow("Email", esc(b.email))}${detailRow("Phone", esc(b.phone))}
@@ -159,9 +171,13 @@ export async function sendBookingConfirmation(b: BookingEmail) {
     const intro = b.depositPaid
       ? `Thank you, ${esc(b.name)}. Your deposit has been received and your appointment is booked — your receipt and details are below.`
       : `Thank you, ${esc(b.name)}. We&rsquo;ve received your booking and will confirm shortly.`;
+    const underAgeNote = b.under18
+      ? `<p style="font-size:15px;line-height:1.7;color:#4a3f35;margin:0 0 8px;">Since you&rsquo;re under 18, we&rsquo;ll give you a quick call before your visit — a parent or guardian&rsquo;s consent is needed for your treatment.</p>`
+      : "";
     const content = `
       ${depositReceipt(b)}
       <p style="font-size:15px;line-height:1.7;color:#4a3f35;margin:0 0 8px;">${intro}</p>
+      ${underAgeNote}
       <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:18px 0;">
         ${detailRow("Treatment", `${esc(b.serviceName)} (${esc(b.serviceCategory)})`)}
         ${detailRow("When", `${esc(b.date)} at ${esc(b.time)}`)}

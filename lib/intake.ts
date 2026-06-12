@@ -63,7 +63,8 @@ export const YES_NO = ["Yes", "No"] as const;
 
 export const AGE_FIELD_ID = "age18";
 
-export const UNDER_18_MESSAGE = `Online booking is available to guests 18 and over. Please call us at ${SITE.phone} and we'll be happy to arrange your appointment.`;
+export const UNDER_18_MESSAGE =
+  "Thanks for letting us know. Guests under 18 need a parent or guardian's consent, so we'll give you a quick call to confirm your appointment after you book.";
 
 export const CONSENT_STATEMENT =
   "I confirm that the information I have provided is true, accurate and complete to the best of my knowledge, and that I have read and understood the acknowledgements above. I consent to receive my selected treatment from Harav Salon & Spa, and I will promptly inform my technician if any of this information changes.";
@@ -689,8 +690,10 @@ export function validateIntake(form: IntakeForm, answers: IntakeAnswers): Record
   return errors;
 }
 
-/** True when the guest answered "No" to the 18+ question — online booking is
- *  blocked and the guest is asked to call instead. */
+/** True when the guest answered "No" to the 18+ question. The booking still
+ *  goes through with all details — the salon calls to get a parent or
+ *  guardian's consent before confirming (owner's request: never lose the
+ *  guest's information at this step). */
 export function isUnder18(form: IntakeForm, answers: IntakeAnswers): boolean {
   if (!requiresQuestionnaire(form.id)) return false;
   return answers[AGE_FIELD_ID] === "No";

@@ -13,7 +13,6 @@ import {
   sanitizeIntake,
   isUnder18,
   intakeSummary,
-  UNDER_18_MESSAGE,
 } from "@/lib/intake";
 
 const schema = z.object({
@@ -64,9 +63,9 @@ export async function POST(req: NextRequest) {
         { status: 400 },
       );
     }
-    if (isUnder18(intakeForm, intakeAnswers)) {
-      return NextResponse.json({ ok: false, error: UNDER_18_MESSAGE }, { status: 400 });
-    }
+    // Under-18 guests book like anyone else — the salon calls for a parent or
+    // guardian's consent before confirming, so the flag rides along instead.
+    const under18 = isUnder18(intakeForm, intakeAnswers);
 
     // The salon is a one-esthetician studio — a slot can only be sold once.
     const todayWinnipeg = new Intl.DateTimeFormat("en-CA", {
@@ -132,6 +131,7 @@ export async function POST(req: NextRequest) {
       notes: d.notes,
       depositRequired,
       depositAmount: depositRequired ? DEPOSIT_AMOUNT : 0,
+      under18,
       intakeTitle: requiresQuestionnaire(expectedFormId) ? intakeForm.title : undefined,
       intake: requiresQuestionnaire(expectedFormId)
         ? intakeSummary(expectedFormId, intakeAnswers)

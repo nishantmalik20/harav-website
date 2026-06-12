@@ -181,10 +181,6 @@ export function BookingForm() {
       document.getElementById(`intake-${firstId}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
-    if (under18) {
-      setStepError(UNDER_18_MESSAGE);
-      return;
-    }
     if (!consent) {
       setStepError("Please confirm the acknowledgement to complete your booking.");
       return;
@@ -484,7 +480,7 @@ export function BookingForm() {
         <Button
           type="submit"
           className="w-full sm:w-auto"
-          disabled={status === "loading" || (step === STEPS.length - 1 && under18)}
+          disabled={status === "loading"}
         >
           {step < STEPS.length - 1
             ? "Continue"

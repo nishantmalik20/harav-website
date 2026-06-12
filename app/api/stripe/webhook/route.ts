@@ -8,7 +8,7 @@ import {
   sendOrderNotification,
   type OrderEmail,
 } from "@/lib/email";
-import { INTAKE_FORMS, intakeSummary, requiresQuestionnaire } from "@/lib/intake";
+import { INTAKE_FORMS, intakeSummary, isUnder18, requiresQuestionnaire } from "@/lib/intake";
 import type { BookingRow } from "@/types/database";
 
 export async function POST(req: NextRequest) {
@@ -64,6 +64,7 @@ export async function POST(req: NextRequest) {
               notes: data.notes,
               depositRequired: true,
               depositAmount: data.deposit_amount,
+              under18: hasIntake && isUnder18(INTAKE_FORMS[formId], data.intake!),
               depositPaid: true,
               paymentRef:
                 typeof session.payment_intent === "string"
