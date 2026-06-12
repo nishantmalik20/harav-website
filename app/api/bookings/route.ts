@@ -3,6 +3,7 @@ import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getStripe } from "@/lib/stripe";
 import { findService, effectivePrice, DEPOSIT_AMOUNT } from "@/lib/services";
+import { generateSlots, takenTimes } from "@/lib/availability";
 import { sendBookingNotification, sendBookingConfirmation, type BookingEmail } from "@/lib/email";
 import {
   INTAKE_FORMS,
@@ -21,8 +22,8 @@ const schema = z.object({
   phone: z.string().min(5).max(40),
   serviceCategory: z.string().min(1),
   serviceName: z.string().min(1),
-  date: z.string().min(1).max(40),
-  time: z.string().min(1).max(20),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  time: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/),
   esthetician: z.string().max(120).optional(),
   notes: z.string().max(2000).optional(),
   intake: z.object({
@@ -67,7 +68,29 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false, error: UNDER_18_MESSAGE }, { status: 400 });
     }
 
+    // The salon is a one-esthetician studio — a slot can only be sold once.
+    const todayWinnipeg = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Winnipeg",
+    }).format(new Date());
+    if (d.date < todayWinnipeg) {
+      return NextResponse.json({ ok: false, error: "That date has already passed." }, { status: 400 });
+    }
+    if (!generateSlots(d.date).some((s) => s.value === d.time)) {
+      return NextResponse.json(
+        { ok: false, error: "Please choose a time within our opening hours." },
+        { status: 400 },
+      );
+    }
+
     const supabase = createAdminClient();
+    const taken = await takenTimes(supabase, d.date);
+    if (taken.includes(d.time)) {
+      return NextResponse.json(
+        { ok: false, error: "That time was just booked by another guest — please choose a different time." },
+        { status: 409 },
+      );
+    }
+
     const { data: booking, error } = await supabase
       .from("bookings")
       .insert({

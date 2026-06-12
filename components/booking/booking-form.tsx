@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { IntakeFieldInput, selectClass } from "@/components/booking/intake-fields";
 import { SERVICE_CATEGORIES, DEPOSIT_AMOUNT } from "@/lib/services";
-import { BUSINESS_HOURS } from "@/lib/site";
+import { generateSlots } from "@/lib/availability";
 import {
   INTAKE_FORMS,
   intakeFormIdForService,
@@ -30,29 +30,11 @@ const SEP = "~~~";
 
 const STEPS = ["Treatment", "Date & time", "Your details", "Consultation"];
 
-function generateSlots(dateStr: string) {
-  if (!dateStr) return [] as { value: string; label: string }[];
-  const date = new Date(`${dateStr}T00:00:00`);
-  const hours = BUSINESS_HOURS[date.getDay()];
-  if (!hours) return [];
-  const [openH, openM] = hours.open.split(":").map(Number);
-  const [closeH, closeM] = hours.close.split(":").map(Number);
-  const end = closeH * 60 + closeM;
-  const slots: { value: string; label: string }[] = [];
-  for (let mins = openH * 60 + openM; mins <= end - 30; mins += 30) {
-    const hh = Math.floor(mins / 60);
-    const mm = mins % 60;
-    const value = `${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}`;
-    const ampm = hh >= 12 ? "pm" : "am";
-    const h12 = ((hh + 11) % 12) + 1;
-    slots.push({ value, label: `${h12}:${String(mm).padStart(2, "0")} ${ampm}` });
-  }
-  return slots;
-}
-
 export function BookingForm() {
   const router = useRouter();
-  const today = new Date().toISOString().split("T")[0];
+  // en-CA formats as YYYY-MM-DD in the *device's* timezone — toISOString would
+  // roll an evening guest in Winnipeg over to tomorrow (it's UTC).
+  const today = new Date().toLocaleDateString("en-CA");
   const topRef = useRef<HTMLFormElement>(null);
 
   const [step, setStep] = useState(0);
@@ -68,8 +50,46 @@ export function BookingForm() {
   const [stepError, setStepError] = useState("");
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [taken, setTaken] = useState<string[]>([]);
+  const [checking, setChecking] = useState(false);
+  const [availabilityRefresh, setAvailabilityRefresh] = useState(0);
 
-  const slots = useMemo(() => generateSlots(date), [date]);
+  const slots = useMemo(() => {
+    const all = generateSlots(date);
+    if (date !== today) return all;
+    // Same-day bookings can't reach into the past.
+    const now = new Date();
+    const nowHM = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+    return all.filter((s) => s.value > nowHM);
+  }, [date, today]);
+
+  // One esthetician — a slot someone else holds must read as unavailable.
+  useEffect(() => {
+    if (!date) {
+      setTaken([]);
+      return;
+    }
+    let active = true;
+    setChecking(true);
+    fetch(`/api/bookings/availability?date=${date}`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (active && d?.ok && Array.isArray(d.taken)) setTaken(d.taken);
+      })
+      .catch(() => {
+        // Fail open — the booking POST re-checks and is the source of truth.
+      })
+      .finally(() => {
+        if (active) setChecking(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [date, availabilityRefresh]);
+
+  useEffect(() => {
+    if (time && taken.includes(time)) setTime("");
+  }, [taken, time]);
 
   const selected = useMemo(() => {
     if (!serviceValue) return null;
@@ -189,8 +209,18 @@ export function BookingForm() {
           consent: true,
         }),
       });
-      const data = await res.json();
-      if (!res.ok || !data.ok) throw new Error();
+      const data = await res.json().catch(() => null);
+      if (res.status === 409) {
+        // Someone took the slot while this guest was filling the form — send
+        // them back to the time step with fresh availability.
+        setStatus("idle");
+        setTime("");
+        setAvailabilityRefresh((n) => n + 1);
+        goTo(1);
+        setStepError(data?.error || "That time was just booked — please choose another.");
+        return;
+      }
+      if (!res.ok || !data?.ok) throw new Error();
 
       if (data.requiresDeposit && data.checkoutUrl) {
         window.location.href = data.checkoutUrl;
@@ -295,18 +325,31 @@ export function BookingForm() {
               required
               value={time}
               onChange={(e) => setTime(e.target.value)}
-              disabled={!date}
+              disabled={!date || checking}
               className={cn(selectClass, "disabled:opacity-50")}
             >
               <option value="" disabled>
-                {date ? "Choose a time…" : "Pick a date first"}
+                {!date ? "Pick a date first" : checking ? "Checking times…" : "Choose a time…"}
               </option>
-              {slots.map((slot) => (
-                <option key={slot.value} value={slot.value}>
-                  {slot.label}
-                </option>
-              ))}
+              {slots.map((slot) => {
+                const isTaken = taken.includes(slot.value);
+                return (
+                  <option key={slot.value} value={slot.value} disabled={isTaken}>
+                    {isTaken ? `${slot.label} — booked` : slot.label}
+                  </option>
+                );
+              })}
             </select>
+            {date && !checking && slots.length === 0 && (
+              <p className="font-body text-sm text-ink-500">
+                No times left that day — please pick another date.
+              </p>
+            )}
+            {date && !checking && slots.length > 0 && slots.every((s) => taken.includes(s.value)) && (
+              <p className="font-body text-sm text-ink-500">
+                That day is fully booked — please try another date.
+              </p>
+            )}
           </div>
         </div>
       )}
