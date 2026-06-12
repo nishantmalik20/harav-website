@@ -41,3 +41,5 @@ next-env.d.ts
 
 # client-sent consultation form references (contain third-party details — keep local only)
 /Form References/
+
+.vercel
