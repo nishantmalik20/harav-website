@@ -1,62 +1,100 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { BUSINESS_HOURS } from "@/lib/site";
+import { findService } from "@/lib/services";
 
-/** How long an unpaid deposit booking holds its slot. The row is created before
- *  Stripe Checkout opens, so a hold window keeps the slot safe while the guest
- *  pays — but an abandoned checkout must not block the calendar forever. */
-const DEPOSIT_HOLD_MINUTES = 30;
+/** The booking calendar runs on a 30-minute grid. */
+export const SLOT_MINUTES = 30;
 
 export interface Slot {
   value: string;
   label: string;
 }
 
-/** Every bookable 30-minute slot for a date, from the business hours. */
-export function generateSlots(dateStr: string): Slot[] {
+function toMinutes(hhmm: string): number {
+  const [h, m] = hhmm.slice(0, 5).split(":").map(Number);
+  return h * 60 + m;
+}
+
+function toSlot(mins: number): Slot {
+  const hh = Math.floor(mins / 60);
+  const mm = mins % 60;
+  const value = `${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}`;
+  const ampm = hh >= 12 ? "pm" : "am";
+  const h12 = ((hh + 11) % 12) + 1;
+  return { value, label: `${h12}:${String(mm).padStart(2, "0")} ${ampm}` };
+}
+
+/** How many 30-minute slots a treatment of `durationMin` occupies (min one). */
+export function slotsNeeded(durationMin: number): number {
+  return Math.max(1, Math.ceil(durationMin / SLOT_MINUTES));
+}
+
+/** The 30-minute slot start-times ("HH:MM") a treatment fills from a start. */
+export function occupiedSlots(startValue: string, durationMin: number): string[] {
+  const start = toMinutes(startValue);
+  return Array.from(
+    { length: slotsNeeded(durationMin) },
+    (_, i) => toSlot(start + i * SLOT_MINUTES).value,
+  );
+}
+
+/** Bookable start times for a date where a treatment of `durationMin` finishes
+ *  inside business hours. Defaults to a single 30-minute slot. */
+export function generateSlots(dateStr: string, durationMin = SLOT_MINUTES): Slot[] {
   if (!dateStr) return [];
   const date = new Date(`${dateStr}T00:00:00`);
   const hours = BUSINESS_HOURS[date.getDay()];
   if (!hours) return [];
-  const [openH, openM] = hours.open.split(":").map(Number);
-  const [closeH, closeM] = hours.close.split(":").map(Number);
-  const end = closeH * 60 + closeM;
+  const open = toMinutes(hours.open);
+  const close = toMinutes(hours.close);
   const slots: Slot[] = [];
-  for (let mins = openH * 60 + openM; mins <= end - 30; mins += 30) {
-    const hh = Math.floor(mins / 60);
-    const mm = mins % 60;
-    const value = `${String(hh).padStart(2, "0")}:${String(mm).padStart(2, "0")}`;
-    const ampm = hh >= 12 ? "pm" : "am";
-    const h12 = ((hh + 11) % 12) + 1;
-    slots.push({ value, label: `${h12}:${String(mm).padStart(2, "0")} ${ampm}` });
+  // The whole treatment, not just its first slot, has to fit before closing.
+  for (let mins = open; mins + durationMin <= close; mins += SLOT_MINUTES) {
+    slots.push(toSlot(mins));
   }
   return slots;
 }
 
 interface SlotRow {
   preferred_time: string;
+  service_category: string;
+  service_name: string;
   status: string;
   deposit_required: boolean;
   deposit_status: string;
-  created_at: string;
 }
 
+/** A booking only holds its slot once it's actually secured: salon-confirmed, a
+ *  no-deposit booking (confirmed the moment it's placed), or a deposit that has
+ *  been PAID. An unpaid deposit — e.g. a guest who opened Stripe Checkout and
+ *  backed out — never holds the slot, so it can't block that guest from trying
+ *  again, or anyone else, when no money has changed hands. */
 function blocksSlot(row: SlotRow): boolean {
-  // One esthetician — a salon-confirmed booking always owns its slot.
   if (row.status === "confirmed") return true;
-  if (row.status !== "new") return false;
-  if (!row.deposit_required || row.deposit_status === "paid") return true;
-  return Date.now() - new Date(row.created_at).getTime() < DEPOSIT_HOLD_MINUTES * 60_000;
+  if (row.status !== "new") return false; // cancelled / no_show / completed
+  if (!row.deposit_required) return true;
+  return row.deposit_status === "paid";
 }
 
-/** Times already held on a date ("HH:MM"). SERVER ONLY — bookings are behind
- *  RLS, so this needs the service-role client; only times ever leave here. */
+function rowDuration(row: SlotRow): number {
+  return findService(row.service_category, row.service_name)?.service.durationMin ?? SLOT_MINUTES;
+}
+
+/** Every 30-minute slot start-time already held on a date ("HH:MM"), expanded
+ *  by each booking's treatment length so an hour-long appointment blocks the
+ *  whole hour. SERVER ONLY — bookings are behind RLS, so this needs the
+ *  service-role client; only times ever leave here. */
 export async function takenTimes(supabase: SupabaseClient, date: string): Promise<string[]> {
   const { data, error } = await supabase
     .from("bookings")
-    .select("preferred_time,status,deposit_required,deposit_status,created_at")
+    .select("preferred_time,service_category,service_name,status,deposit_required,deposit_status")
     .eq("preferred_date", date)
     .in("status", ["new", "confirmed"]);
   if (error) throw error;
-  const rows = (data ?? []) as SlotRow[];
-  return [...new Set(rows.filter(blocksSlot).map((r) => r.preferred_time.slice(0, 5)))];
+  const taken = new Set<string>();
+  for (const row of (data ?? []) as SlotRow[]) {
+    if (!blocksSlot(row)) continue;
+    for (const slot of occupiedSlots(row.preferred_time, rowDuration(row))) taken.add(slot);
+  }
+  return [...taken];
 }

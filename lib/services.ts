@@ -22,6 +22,13 @@ export interface Service {
   priceLabel?: string;
   /** Whether this service requires the $20 booking deposit. */
   deposit: boolean;
+  /**
+   * Chair time in minutes — drives how many 30-minute slots the booking holds,
+   * so an hour-long treatment fills the whole hour (not just the first slot).
+   * ESTIMATES pending the owner's confirmation; rounded up to the 30-min grid.
+   * Defaults to 30 where omitted.
+   */
+  durationMin?: number;
 }
 
 export interface ServiceCategory {
@@ -41,21 +48,22 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       "From a 30-minute refresh to advanced care. Brightening, anti-aging, turmeric glow, collagen and lymphatic drainage, hydradermabrasion, and carbon-laser facials. Chosen for your skin, not a one-size routine.",
     depositNote: "A $20 deposit holds every facial. It comes off your total.",
     services: [
-      { name: "30 Min Refresh Facial", price: 65, salePrice: 49.99, deposit: true },
-      { name: "Classic Facial", price: 75, salePrice: 65, deposit: true },
-      { name: "Anti Aging Facial", price: 135, salePrice: 69, deposit: true },
-      { name: "Brightening Facial", price: 125, salePrice: 75, deposit: true },
-      { name: "Hydration Boost Facial", price: 125, salePrice: 75, deposit: true },
-      { name: "Turmeric Glow Facial", price: 113, salePrice: 85, deposit: true },
-      { name: "Anti Acne Facial", price: null, deposit: true },
+      { name: "30 Min Refresh Facial", price: 65, salePrice: 49.99, deposit: true, durationMin: 30 },
+      { name: "Classic Facial", price: 75, salePrice: 65, deposit: true, durationMin: 60 },
+      { name: "Anti Aging Facial", price: 135, salePrice: 69, deposit: true, durationMin: 60 },
+      { name: "Brightening Facial", price: 125, salePrice: 75, deposit: true, durationMin: 60 },
+      { name: "Hydration Boost Facial", price: 125, salePrice: 75, deposit: true, durationMin: 60 },
+      { name: "Turmeric Glow Facial", price: 113, salePrice: 85, deposit: true, durationMin: 60 },
+      { name: "Anti Acne Facial", price: null, deposit: true, durationMin: 60 },
       {
         name: "Collagen Boost Facial with Lymphatic Drainage Massage",
         price: 110,
         salePrice: 99,
         deposit: true,
+        durationMin: 60,
       },
-      { name: "Hydradermabrasion Facial", price: 160, salePrice: 120, deposit: true },
-      { name: "Carbon Laser Facial", price: 185, salePrice: 150, deposit: true },
+      { name: "Hydradermabrasion Facial", price: 160, salePrice: 120, deposit: true, durationMin: 60 },
+      { name: "Carbon Laser Facial", price: 185, salePrice: 150, deposit: true, durationMin: 60 },
     ],
   },
   {
@@ -75,7 +83,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { name: "Underarms", price: 26.95, deposit: false },
       { name: "Full Arms", price: 41.95, deposit: false },
       { name: "1/2 Arms", price: 27.95, deposit: false },
-      { name: "Full Legs", price: 71.95, deposit: true },
+      { name: "Full Legs", price: 71.95, deposit: true, durationMin: 45 },
       { name: "1/2 Legs", price: 47.95, deposit: false },
       { name: "Vagacial", price: 28.95, deposit: false },
       { name: "Sweet Cheeks (Bump Facial)", price: 28.95, deposit: false },
@@ -98,10 +106,10 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { name: "1/2 Legs", price: 25, deposit: false },
       { name: "Full Arms", price: 30, deposit: false },
       { name: "1/2 Arms", price: 20, deposit: false },
-      { name: "Full Legs, Arms & U-Arms", price: 80, deposit: false },
-      { name: "Full Legs, Arms & Brazilian", price: 105, deposit: false },
-      { name: "Full Body with Brazilian", price: 150, salePrice: 140, deposit: true },
-      { name: "Full Body without Brazilian", price: 130, salePrice: 120, deposit: true },
+      { name: "Full Legs, Arms & U-Arms", price: 80, deposit: false, durationMin: 60 },
+      { name: "Full Legs, Arms & Brazilian", price: 105, deposit: false, durationMin: 90 },
+      { name: "Full Body with Brazilian", price: 150, salePrice: 140, deposit: true, durationMin: 90 },
+      { name: "Full Body without Brazilian", price: 130, salePrice: 120, deposit: true, durationMin: 60 },
     ],
   },
   {
@@ -114,12 +122,12 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { name: "Lash or Brow Tint", price: 24, deposit: false },
       { name: "Lash or Brow Tint + Shape", price: 35, deposit: false },
       { name: "Lash + Brow Tint", price: 40, deposit: false },
-      { name: "Lash + Brow Tint + Shape", price: 55, deposit: false },
-      { name: "Sweet Lash Lift", price: 62, deposit: true },
-      { name: "Sweet Lash Lift + Tint", price: 82, deposit: true },
-      { name: "Sweet YY Lash Extensions", price: 85, deposit: true },
-      { name: "Sweet Lash Classic", price: 75, deposit: true },
-      { name: "Lash Fill (30–90 Min)", price: null, priceLabel: "$50 – $80", deposit: false },
+      { name: "Lash + Brow Tint + Shape", price: 55, deposit: false, durationMin: 45 },
+      { name: "Sweet Lash Lift", price: 62, deposit: true, durationMin: 60 },
+      { name: "Sweet Lash Lift + Tint", price: 82, deposit: true, durationMin: 60 },
+      { name: "Sweet YY Lash Extensions", price: 85, deposit: true, durationMin: 120 },
+      { name: "Sweet Lash Classic", price: 75, deposit: true, durationMin: 120 },
+      { name: "Lash Fill (30–90 Min)", price: null, priceLabel: "$50 – $80", deposit: false, durationMin: 60 },
       { name: "Lash Removal", price: 25, deposit: false },
     ],
   },
@@ -130,9 +138,9 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       "Gel nails, gel manicures and fills. Clean, considered, and built to last the weeks between visits.",
     depositNote: "Gel Nails and Nail Fill take a $20 deposit.",
     services: [
-      { name: "Gel Nails", price: 65, deposit: true },
-      { name: "Nail Fill", price: 55, deposit: true },
-      { name: "Gel Manicure", price: 45, deposit: false },
+      { name: "Gel Nails", price: 65, deposit: true, durationMin: 60 },
+      { name: "Nail Fill", price: 55, deposit: true, durationMin: 60 },
+      { name: "Gel Manicure", price: 45, deposit: false, durationMin: 45 },
     ],
   },
   {
@@ -142,8 +150,8 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       "A 30- or 60-minute relaxation massage. Quiet pressure, warm oil, and room to breathe.",
     depositNote: "The 60-minute massage takes a $20 deposit.",
     services: [
-      { name: "30 Min Relaxation Massage", price: 30, deposit: false },
-      { name: "60 Min Relaxation Massage", price: 60, deposit: true },
+      { name: "30 Min Relaxation Massage", price: 30, deposit: false, durationMin: 30 },
+      { name: "60 Min Relaxation Massage", price: 60, deposit: true, durationMin: 60 },
     ],
   },
 ];

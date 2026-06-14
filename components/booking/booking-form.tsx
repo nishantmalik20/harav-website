@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { IntakeFieldInput, selectClass } from "@/components/booking/intake-fields";
 import { SERVICE_CATEGORIES, DEPOSIT_AMOUNT } from "@/lib/services";
-import { generateSlots } from "@/lib/availability";
+import { generateSlots, occupiedSlots } from "@/lib/availability";
 import {
   INTAKE_FORMS,
   intakeFormIdForService,
@@ -54,14 +54,33 @@ export function BookingForm() {
   const [checking, setChecking] = useState(false);
   const [availabilityRefresh, setAvailabilityRefresh] = useState(0);
 
+  const selected = useMemo(() => {
+    if (!serviceValue) return null;
+    const [categoryName, serviceName] = serviceValue.split(SEP);
+    const category = SERVICE_CATEGORIES.find((c) => c.name === categoryName);
+    const service = category?.services.find((s) => s.name === serviceName);
+    return category && service ? { category, service } : null;
+  }, [serviceValue]);
+
+  // Most treatments take a single 30-min slot; longer ones (facials, lash sets,
+  // full-body waxing…) fill the whole hour-plus they need.
+  const durationMin = selected?.service.durationMin ?? 30;
+
   const slots = useMemo(() => {
-    const all = generateSlots(date);
+    const all = generateSlots(date, durationMin);
     if (date !== today) return all;
     // Same-day bookings can't reach into the past.
     const now = new Date();
     const nowHM = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
     return all.filter((s) => s.value > nowHM);
-  }, [date, today]);
+  }, [date, today, durationMin]);
+
+  // A start time is unavailable if any 30-min slot the treatment would occupy
+  // is already held by another booking.
+  const slotUnavailable = useMemo(() => {
+    const held = new Set(taken);
+    return (value: string) => occupiedSlots(value, durationMin).some((v) => held.has(v));
+  }, [taken, durationMin]);
 
   // One esthetician — a slot someone else holds must read as unavailable.
   useEffect(() => {
@@ -88,16 +107,8 @@ export function BookingForm() {
   }, [date, availabilityRefresh]);
 
   useEffect(() => {
-    if (time && taken.includes(time)) setTime("");
-  }, [taken, time]);
-
-  const selected = useMemo(() => {
-    if (!serviceValue) return null;
-    const [categoryName, serviceName] = serviceValue.split(SEP);
-    const category = SERVICE_CATEGORIES.find((c) => c.name === categoryName);
-    const service = category?.services.find((s) => s.name === serviceName);
-    return category && service ? { category, service } : null;
-  }, [serviceValue]);
+    if (time && slotUnavailable(time)) setTime("");
+  }, [slotUnavailable, time]);
 
   const intakeForm = useMemo(() => {
     if (!selected) return INTAKE_FORMS.general;
@@ -110,6 +121,9 @@ export function BookingForm() {
   function onSelectService(value: string) {
     const prevFormId = intakeForm.id;
     setServiceValue(value);
+    // A new treatment may run a different length, so a slot picked earlier might
+    // no longer fit — clear it and let the guest re-choose.
+    setTime("");
     const [categoryName, serviceName] = value.split(SEP);
     const category = SERVICE_CATEGORIES.find((c) => c.name === categoryName);
     const nextFormId = category
@@ -328,7 +342,7 @@ export function BookingForm() {
                 {!date ? "Pick a date first" : checking ? "Checking times…" : "Choose a time…"}
               </option>
               {slots.map((slot) => {
-                const isTaken = taken.includes(slot.value);
+                const isTaken = slotUnavailable(slot.value);
                 return (
                   <option key={slot.value} value={slot.value} disabled={isTaken}>
                     {isTaken ? `${slot.label} — booked` : slot.label}
@@ -341,7 +355,7 @@ export function BookingForm() {
                 No times left that day — please pick another date.
               </p>
             )}
-            {date && !checking && slots.length > 0 && slots.every((s) => taken.includes(s.value)) && (
+            {date && !checking && slots.length > 0 && slots.every((s) => slotUnavailable(s.value)) && (
               <p className="font-body text-sm text-ink-500">
                 That day is fully booked — please try another date.
               </p>

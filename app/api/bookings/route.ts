@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getStripe } from "@/lib/stripe";
 import { findService, effectivePrice, DEPOSIT_AMOUNT } from "@/lib/services";
-import { generateSlots, takenTimes } from "@/lib/availability";
+import { generateSlots, occupiedSlots, takenTimes } from "@/lib/availability";
 import { sendBookingNotification, sendBookingConfirmation, type BookingEmail } from "@/lib/email";
 import {
   INTAKE_FORMS,
@@ -74,7 +74,9 @@ export async function POST(req: NextRequest) {
     if (d.date < todayWinnipeg) {
       return NextResponse.json({ ok: false, error: "That date has already passed." }, { status: 400 });
     }
-    if (!generateSlots(d.date).some((s) => s.value === d.time)) {
+    // The whole treatment (not just its start) must fit inside business hours.
+    const durationMin = service.durationMin ?? 30;
+    if (!generateSlots(d.date, durationMin).some((s) => s.value === d.time)) {
       return NextResponse.json(
         { ok: false, error: "Please choose a time within our opening hours." },
         { status: 400 },
@@ -83,7 +85,8 @@ export async function POST(req: NextRequest) {
 
     const supabase = createAdminClient();
     const taken = await takenTimes(supabase, d.date);
-    if (taken.includes(d.time)) {
+    // Reject if any 30-min slot this treatment would occupy is already held.
+    if (occupiedSlots(d.time, durationMin).some((t) => taken.includes(t))) {
       return NextResponse.json(
         { ok: false, error: "That time was just booked by another guest — please choose a different time." },
         { status: 409 },
