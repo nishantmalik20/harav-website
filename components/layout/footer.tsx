@@ -141,6 +141,13 @@ export function Footer() {
               className="text-gold-light transition-opacity hover:opacity-80"
             >
               inishant.com
+            </a>{" "}
+            via{" "}
+            <a
+              href="https://onboardprints.ca"
+              className="text-gold-light transition-opacity hover:opacity-80"
+            >
+              onboardprints.ca
             </a>
           </p>
         </div>

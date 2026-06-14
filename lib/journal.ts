@@ -68,7 +68,7 @@ export const JOURNAL_POSTS: JournalPost[] = [
     title: "How long do lash extensions last? A Winnipeg lash-care guide",
     date: "2026-05-28",
     dateLabel: "May 28, 2026",
-    image: "/images/service-lash.jpg",
+    image: "/images/journal-lash.jpg",
     excerpt:
       "From the natural lash cycle to fills, aftercare and choosing your style — everything you need to keep eyelash extensions looking full and fresh.",
     author: KHUSHI,
