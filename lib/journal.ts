@@ -32,7 +32,7 @@ export const JOURNAL_POSTS: JournalPost[] = [
     title: "Body sugaring in Winnipeg: what to expect your first time",
     date: "2026-06-02",
     dateLabel: "June 2, 2026",
-    image: "/images/service-sugaring.jpg",
+    image: "/images/journal-body-sugaring.jpg",
     excerpt:
       "Thinking about your first body sugaring appointment? Here's how it works, how to prepare, and what to expect from a gentle, natural hair removal session.",
     author: KHUSHI,
@@ -103,7 +103,7 @@ export const JOURNAL_POSTS: JournalPost[] = [
     title: "Sugaring or waxing: which is gentler?",
     date: "2026-05-20",
     dateLabel: "May 20, 2026",
-    image: "/images/journal-sugaring.jpg",
+    image: "/images/journal-waxing.jpg",
     excerpt:
       "Two ways to the same smooth finish. Here's how they differ, which suits sensitive skin, and what to expect from each.",
     author: KHUSHI,
