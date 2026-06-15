@@ -76,7 +76,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { name: "Bikini", price: 34.94, deposit: false },
       { name: "Bikini+", price: 43.95, deposit: false },
       { name: "Brazilian", price: 49.95, deposit: false },
-      { name: "Brows", price: 21.95, deposit: false },
+      { name: "Eyebrows", price: 21.95, deposit: false },
       { name: "Lip or Chin", price: 17.95, deposit: false },
       { name: "Lip and Chin", price: 25.95, deposit: false },
       { name: "Full Face", price: 34.95, deposit: false },
@@ -141,6 +141,8 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       { name: "Gel Nails", price: 65, deposit: true, durationMin: 60 },
       { name: "Nail Fill", price: 55, deposit: true, durationMin: 60 },
       { name: "Gel Manicure", price: 45, deposit: false, durationMin: 45 },
+      { name: "Manicure", price: 50, deposit: false, durationMin: 45 },
+      { name: "Pedicure", price: 50, deposit: false, durationMin: 60 },
     ],
   },
   {
